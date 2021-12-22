@@ -1,0 +1,26 @@
+CREATE TABLE a (nome VARCHAR(255) NOT NULL);
+
+CREATE FUNCTION cria_a(nome VARCHAR) RETURNS VOID AS '
+  INSERT INTO a (nome) VALUES (cria_a.nome);
+' LANGUAGE SQL;
+
+SELECT cria_a('Vinicius');
+SELECT * FROM a;
+
+CREATE FUNCTION cria_b(nome VARCHAR) RETURNS VARCHAR AS '
+  INSERT INTO a (nome) VALUES (cria_b.nome);
+
+  SELECT nome;
+' LANGUAGE SQL;
+
+SELECT cria_b('Vinicius');
+SELECT * FROM a;
+
+CREATE OR REPLACE FUNCTION cria_b(nome VARCHAR) RETURNS VARCHAR AS $$
+  INSERT INTO a (nome) VALUES ('Patricia');
+
+  SELECT * FROM a;
+$$ LANGUAGE SQL;
+
+SELECT cria_b('Vinicius');
+SELECT * FROM a;
