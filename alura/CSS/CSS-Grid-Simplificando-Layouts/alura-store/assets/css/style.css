@@ -16,11 +16,17 @@
     align-items: center;
     padding: 0 2rem;
 }
- 
+
 .conteudo {
     grid-area: conteudo;
+    padding: 0 2rem;
 }
 
 .rodape {
     grid-area: rodape;
+    padding: 1rem;
+    background: #fdfdfd;
+    color: #333333;
+    font-size: .8rem;
+    text-align: center;
 }
