@@ -1,3 +1,8 @@
+.menu__item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .menu__link {
   color: #333;
   padding: .5rem 1rem;
