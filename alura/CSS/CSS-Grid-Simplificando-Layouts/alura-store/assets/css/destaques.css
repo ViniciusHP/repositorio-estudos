@@ -1,6 +1,11 @@
 .destaques {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  /* 
+    minmax(0, 1fr) é usado para que os elementos não transbordem do elemento container,
+     por padrão, com display grid os componentes filhos tem min-width: auto, com isso ocorre o transbordamento
+     mas ao usar o minmax, nós definimos que o min-width será 0
+  */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: 33.33% 33.33% 33.33%;
   /* row-gap: .2rem;
   column-gap: .2rem; */
