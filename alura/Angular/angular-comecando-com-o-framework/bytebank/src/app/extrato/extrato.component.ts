@@ -1,18 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Transferencia } from '../nova-transferencia/nova-transferencia.component';
 
 @Component({
   selector: 'extrato',
   templateUrl: './extrato.component.html',
-  styleUrls: ['./extrato.component.scss']
+  styleUrls: ['./extrato.component.scss'],
 })
-export class ExtratoComponent implements OnInit {
-
+export class ExtratoComponent {
   @Input() transferencias: Transferencia[];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
