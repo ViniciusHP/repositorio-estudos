@@ -1,6 +1,16 @@
-<div *ngFor="let transferencia of transferencias">
-  <p>Valor: {{transferencia?.valor}}</p>
-  <p>Destino: {{transferencia?.destino}}</p>
-  <p>Data: {{transferencia?.data | date:'dd/MM/y - HH:mm:ss'}}</p>
-</div>
-
+<table class="tabela" aria-label="Tabela de valores de transferências">
+  <thead class="tabela__cabecalho">
+    <tr>
+      <th class="tabela__cabecalho__conteudo" colspan="col">Valor</th>
+      <th class="tabela__cabecalho__conteudo" colspan="col">Destino</th>
+      <th class="tabela__cabecalho__conteudo" colspan="col">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="tabela__linha" *ngFor="let transferencia of transferencias">
+      <td class="tabela__conteudo">{{transferencia?.valor | currency:'BRL':'symbol':'0.2-2':'pt'}}</td>
+      <td class="tabela__conteudo">{{transferencia?.destino}}</td>
+      <td class="tabela__conteudo">{{transferencia?.data | date:'dd/MM/y HH:mm:ss'}}</td>
+    </tr>
+  </tbody>
+</table>
