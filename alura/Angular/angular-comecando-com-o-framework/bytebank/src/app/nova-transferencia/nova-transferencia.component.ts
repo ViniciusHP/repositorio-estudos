@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-
-export interface Transferencia {
-  valor: number;
-  destino: number;
-  data?: Date
-}
+import { Transferencia } from '../models/transferencia.model';
 
 @Component({
   selector: 'nova-transferencia',
@@ -12,7 +7,7 @@ export interface Transferencia {
   styleUrls: ['./nova-transferencia.component.scss'],
 })
 export class NovaTransferenciaComponente {
-  @Output() aoTransferir = new EventEmitter<Transferencia>();
+  @Output() aoTransferir = new EventEmitter<any>();
 
   valor: number;
   destino: number;

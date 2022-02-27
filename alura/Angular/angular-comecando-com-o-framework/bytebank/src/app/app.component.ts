@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Transferencia } from './nova-transferencia/nova-transferencia.component';
+import { Transferencia } from './models/transferencia.model';
 import { TransferenciaService } from './services/transferencia.service';
 
 @Component({
