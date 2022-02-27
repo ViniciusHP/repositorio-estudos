@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Transferencia } from './models/transferencia.model';
-import { TransferenciaService } from './services/transferencia.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +6,5 @@ import { TransferenciaService } from './services/transferencia.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private service: TransferenciaService) {}
-
-  transferir(transferencia: Transferencia) {
-    this.service.adicionar(transferencia);
-  }
+  constructor() {}
 }

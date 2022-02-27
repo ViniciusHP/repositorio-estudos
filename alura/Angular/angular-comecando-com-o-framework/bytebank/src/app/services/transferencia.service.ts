@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Transferencia } from '../models/transferencia.model';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -19,16 +18,17 @@ export class TransferenciaService {
     return this._listaTransferencias;
   }
 
-  todas(): Observable<Transferencia[]>{
+  todas(): Observable<Transferencia[]> {
     return this.httpClient.get<Transferencia[]>(this._url);
   }
 
-  adicionar(transferencia: Transferencia) {
+  adicionar(transferencia: Transferencia): Observable<Transferencia> {
     this._tratar(transferencia);
-    this._listaTransferencias.push(transferencia);
+
+    return this.httpClient.post<Transferencia>(this._url, transferencia);
   }
 
   private _tratar(transferencia: Transferencia) {
-    transferencia.data = new Date().toString();
+    transferencia.data = new Date().toISOString();
   }
 }
