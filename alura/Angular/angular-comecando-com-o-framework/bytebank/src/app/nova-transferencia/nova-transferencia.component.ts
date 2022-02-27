@@ -7,7 +7,7 @@ import { TransferenciaService } from '../services/transferencia.service';
   templateUrl: './nova-transferencia.component.html',
   styleUrls: ['./nova-transferencia.component.scss'],
 })
-export class NovaTransferenciaComponente {
+export class NovaTransferenciaComponent {
   @Output() aoTransferir = new EventEmitter<any>();
 
   valor: number;
