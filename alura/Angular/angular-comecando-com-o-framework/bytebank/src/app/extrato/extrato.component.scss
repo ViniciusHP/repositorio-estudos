@@ -1,7 +1,12 @@
+.container {
+  max-width: fit-content;
+}
+
 .titulo {
   text-align: center;
   font-size: 24px;
   margin-bottom: 16px;
+  color: var(--primary);
 }
 
 .tabela {

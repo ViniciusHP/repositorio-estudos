@@ -1,0 +1,34 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 38px 1fr;
+  grid-template-areas:
+    "cabecalho"
+    "conteudo";
+  width: 100%;
+  height: 100%;
+}
+
+header {
+  grid-area: cabecalho;
+  background-color: var(--primary);
+  padding: 10px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ativo {
+    display: none;
+  }
+}
+
+main {
+  grid-area: conteudo;
+  background-color: #fcfcfc;
+  padding: var(--padding);
+}
