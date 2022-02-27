@@ -8,7 +8,7 @@ import { Transferencia } from '../nova-transferencia/nova-transferencia.componen
 })
 export class ExtratoComponent implements OnInit {
 
-  @Input() transferencia: Transferencia;
+  @Input() transferencias: Transferencia[];
 
   constructor() { }
 

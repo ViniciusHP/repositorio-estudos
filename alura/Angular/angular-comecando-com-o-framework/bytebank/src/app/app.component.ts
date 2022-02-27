@@ -9,10 +9,10 @@ import { Transferencia } from './nova-transferencia/nova-transferencia.component
 export class AppComponent {
   title = 'bytebank';
 
-  transferencia: Transferencia;
+  transferencias: Transferencia[] = [];
 
   transferir(transferencia: Transferencia) {
     console.log(transferencia);
-    this.transferencia = transferencia;
+    this.transferencias.push(transferencia);
   }
 }
