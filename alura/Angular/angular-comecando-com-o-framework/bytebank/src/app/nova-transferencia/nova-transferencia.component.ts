@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export interface Transferencia {
   valor: number;
   destino: number;
+  data?: Date
 }
 
 @Component({
@@ -21,7 +22,6 @@ export class NovaTransferenciaComponente {
     const valorEmitir = {
       valor: this.valor,
       destino: this.destino,
-      data: new Date()
     };
     this.aoTransferir.emit(valorEmitir);
     this.limparCampos();
