@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Transferencia } from '../models/transferencia.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransferenciaService {
   private _listaTransferencias: Transferencia[];
-  private _url = 'http://localhost:3000/transferencias';
+  private _url: string;
 
   constructor(private httpClient: HttpClient) {
+    this._url = `${environment.urlApi}/transferencias`;
     this._listaTransferencias = [];
   }
 
