@@ -8,7 +8,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR, /* Provendo um ControlValueAccessor a partir de um InjectionToken */
-      multi: true, /* Durante a aplicação, podem haver vários provedores de ControlValueAccessor */
+      multi: true, /* Na aplicação podem existir vários provedores de ControlValueAccessor */
       useExisting: forwardRef(() => YesNoButtonGroupComponent) /* Classe que provê a implementação do ControlValueAccessor */
       /*
         forwardRef é usado pois no momento que registramos o token, nossa classe ainda não existe. Dessa forma,
