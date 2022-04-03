@@ -1,15 +1,19 @@
-import { Directive, HostListener } from "@angular/core";
+import { ContentChildren, Directive, HostListener, QueryList } from "@angular/core";
+import { KeyboardManagedItemDirective } from "./keyboard-managed-item.directive";
 
 @Directive({
   selector: '[appKm]'
 })
 export class KeyboardManagerDirective {
 
+  @ContentChildren(KeyboardManagedItemDirective) public items: QueryList<KeyboardManagedItemDirective>// = null
 
   @HostListener('keyup', ['$event'])
   public manageKeys(event: KeyboardEvent): void {
     switch(event.key) {
       case 'ArrowUp':
+        console.log(this.items);
+
         console.log('up');
         break;
       case 'ArrowDown':
@@ -21,8 +25,6 @@ export class KeyboardManagerDirective {
       case 'ArrowRight':
         console.log('right');
         break;
-
-
     }
   }
 }
