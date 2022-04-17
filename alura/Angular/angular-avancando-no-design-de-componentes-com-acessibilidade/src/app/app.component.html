@@ -7,17 +7,41 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-field">
       <label for="firstName">First name</label>
-      <input formControlName="firstName" id="firstName">
+      <input
+        [attr.aria-invalid]="form.get('firstName').invalid"
+        formControlName="firstName"
+        id="firstName">
+      <span
+        class="validation-error"
+        *ngIf="form.get('firstName')?.hasError('required')">
+        First name is required
+      </span>
     </div>
 
     <div class="form-field">
       <label for="surname">Surname</label>
-      <input formControlName="surname" id="surname">
+      <input
+        [attr.aria-invalid]="form.get('surname').invalid"
+        formControlName="surname"
+        id="surname">
+      <span
+        class="validation-error"
+        *ngIf="form.get('surname')?.hasError('required')">
+        Surname is required
+      </span>
     </div>
 
     <div class="form-field">
       <label for="age">Age</label>
-      <input formControlName="age" id="age">
+      <input
+        [attr.aria-invalid]="form.get('age').invalid"
+        formControlName="age"
+        id="age">
+      <span
+        class="validation-error"
+        *ngIf="form.get('surname')?.hasError('required')">
+        Age is required
+      </span>
     </div>
 
     <label for="info">Subscribe to news letter</label>
