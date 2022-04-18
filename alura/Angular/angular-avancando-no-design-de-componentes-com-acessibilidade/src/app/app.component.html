@@ -8,10 +8,12 @@
     <div class="form-field">
       <label for="firstName">First name</label>
       <input
+        aria-describedby="firstName-error"
         [attr.aria-invalid]="form.get('firstName').invalid"
         formControlName="firstName"
         id="firstName">
       <span
+        id="firstName-error"
         class="validation-error"
         *ngIf="form.get('firstName')?.hasError('required')">
         First name is required
@@ -21,10 +23,12 @@
     <div class="form-field">
       <label for="surname">Surname</label>
       <input
+        aria-describedby="surname-error"
         [attr.aria-invalid]="form.get('surname').invalid"
         formControlName="surname"
         id="surname">
       <span
+        id="surname-error"
         class="validation-error"
         *ngIf="form.get('surname')?.hasError('required')">
         Surname is required
@@ -34,10 +38,12 @@
     <div class="form-field">
       <label for="age">Age</label>
       <input
+        aria-describedby="age-error"
         [attr.aria-invalid]="form.get('age').invalid"
         formControlName="age"
         id="age">
       <span
+        id="age-error"
         class="validation-error"
         *ngIf="form.get('surname')?.hasError('required')">
         Age is required
