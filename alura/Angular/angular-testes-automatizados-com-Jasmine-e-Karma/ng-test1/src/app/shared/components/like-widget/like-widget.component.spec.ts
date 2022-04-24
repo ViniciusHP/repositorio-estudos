@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { UniqueIdService } from "../../services/unique-id/unique-id.service";
 import { LikeWidgetComponent } from "./like-widget.component";
+import { LikeWidgetModule } from "./like-widget.module";
 
 describe(LikeWidgetComponent.name, () => {
     let fixture: ComponentFixture<LikeWidgetComponent> = null;
@@ -10,9 +9,7 @@ describe(LikeWidgetComponent.name, () => {
     beforeEach(async () => {
         /* Vai esperar a compilação do componente para só depois dar continuidade aos testes */
         await TestBed.configureTestingModule({
-            declarations: [LikeWidgetComponent],
-            imports: [FontAwesomeModule],
-            providers:[UniqueIdService]
+            imports: [LikeWidgetModule]
         }).compileComponents();
         /* compileComponents é assíncrono, ele vai compilar o componente,
         resolver o template do componente por meio de uma requisição assíncrona e gerar o componente */
