@@ -24,8 +24,16 @@ describe(LikeWidgetComponent.name, () => {
         })
     }) */
 
-    it(`Should create component`, () => {
-        const instance = fixture.componentInstance;
-        expect(instance).toBeTruthy();
+    it(`
+    SHOULD create component`, () => {
+        const component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
+
+    it(`
+    SHOULD auto generate ID 
+    WHEN id input property is missing`, () => {
+        const component = fixture.componentInstance;
+        expect(component.id).toBeTruthy();
     })
 })
