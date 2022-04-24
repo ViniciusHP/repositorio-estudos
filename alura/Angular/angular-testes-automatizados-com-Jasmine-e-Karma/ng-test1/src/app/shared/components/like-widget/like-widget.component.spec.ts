@@ -4,6 +4,7 @@ import { LikeWidgetModule } from "./like-widget.module";
 
 describe(LikeWidgetComponent.name, () => {
     let fixture: ComponentFixture<LikeWidgetComponent> = null;
+    let component : LikeWidgetComponent = null;
 
     /* Está forma é independente do builder do projeto */
     beforeEach(async () => {
@@ -15,6 +16,7 @@ describe(LikeWidgetComponent.name, () => {
         resolver o template do componente por meio de uma requisição assíncrona e gerar o componente */
 
         fixture = TestBed.createComponent(LikeWidgetComponent);
+        component = fixture.componentInstance;
     })
 
     /* Se o builder for o Webpack, não é necessário fazer o processo assíncrono */
@@ -26,14 +28,12 @@ describe(LikeWidgetComponent.name, () => {
 
     it(`
     SHOULD create component`, () => {
-        const component = fixture.componentInstance;
         expect(component).toBeTruthy();
     });
 
     it(`
     SHOULD auto generate ID 
     WHEN id input property is missing`, () => {
-        const component = fixture.componentInstance;
         fixture.detectChanges();
         expect(component.id).toBeTruthy();
     })
@@ -41,7 +41,6 @@ describe(LikeWidgetComponent.name, () => {
     it(`
     SHOULD not generate ID
     WHEN id input property is present`, () => {
-        const component = fixture.componentInstance;
         const someId = 'someId';
         component.id = someId;
         fixture.detectChanges();
