@@ -1,0 +1,18 @@
+import { Directive, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+
+@Directive({
+  selector: '[appAction]'
+})
+export class ActionDirective {
+  @Output('appAction') public appAction: EventEmitter<Event> = new EventEmitter();
+
+  @HostListener('click', ['$event'])
+  public handleClick(event: Event): void {
+    this.appAction.emit(event);
+  }
+
+  @HostListener('keyup', ['$event'])
+  public handleKeyup(event: KeyboardEvent): void {
+    this.appAction.emit(event);
+  }
+}
