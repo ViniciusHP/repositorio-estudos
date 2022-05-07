@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActionDirective } from './action.directive';
 import { ActionModule } from './action.module';
@@ -19,16 +19,44 @@ describe(ActionDirective.name, () => {
 
   it(`(D) (@Output appAction) SHOULD emit event with payload
   WHEN ENTER key is pressed`, () => {
-    const divEl: HTMLElement = fixture.nativeElement.querySelector('.dummy-component');
-    const event = new KeyboardEvent('keyup', {key: 'Enter'});
+    const divEl: HTMLElement =
+      fixture.nativeElement.querySelector('.dummy-component');
+    const event = new KeyboardEvent('keyup', { key: 'Enter' });
     divEl.dispatchEvent(event);
 
     expect(component.hasEvent()).toBeTrue();
+  });
+
+  it(`(D) (@Output appAction) SHOULD emit event with payload
+  WHEN clicked`, () => {
+    const divEl: HTMLElement =
+      fixture.nativeElement.querySelector('.dummy-component');
+      const event = new Event('click');
+      divEl.dispatchEvent(event);
+
+    expect(component.hasEvent()).toBeTrue();
+  });
+
+  it(`(D) (@Output appAction) SHOULD emit event with payload
+  WHEN clicked or ENTER key pressed`, () => {
+    const divEl: HTMLElement =
+      fixture.nativeElement.querySelector('.dummy-component');
+    const clickEvent = new Event('click');
+    const keyboardEvent = new KeyboardEvent('keyup', { key: 'Enter' });
+    divEl.dispatchEvent(clickEvent);
+    expect(component.hasEvent()).withContext('Click event').toBeTrue();
+    component.resetForNewExpectation();
+    divEl.dispatchEvent(keyboardEvent);
+    expect(component.hasEvent()).withContext('Keyboard event "keyup"').toBeTrue();
   })
 });
 
+// Definição de um componente fantoche para o teste da diretiva
 @Component({
-  template: `<div class="dummy-component" (appAction)="actionHandler($event)"></div>`,
+  template: `<div
+    class="dummy-component"
+    (appAction)="actionHandler($event)"
+  ></div>`,
 })
 class ActionDirectiveTestComponent {
   private event: Event = null;
@@ -39,5 +67,9 @@ class ActionDirectiveTestComponent {
 
   public hasEvent(): boolean {
     return !!this.event;
+  }
+
+  public resetForNewExpectation(): void {
+    this.event = null;
   }
 }
