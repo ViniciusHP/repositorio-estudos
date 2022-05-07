@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { PhotoFrameComponent } from './photo-frame.component';
 import { PhotoFrameModule } from './photo-frame.module';
 
@@ -21,13 +26,26 @@ describe(PhotoFrameComponent.name, () => {
 
   it(`#${PhotoFrameComponent.prototype.like.name}
   SHOULD trigger (@Output liked) once
-  WHEN called multiple times within debounce time`, () => {
+  WHEN called multiple times within debounce time`, fakeAsync(() => {
     fixture.detectChanges();
     let times = 0;
     component.liked.subscribe(() => times++);
     component.like();
     component.like();
-
+    tick(500);
     expect(times).toBe(1);
-  });
+  }));
+
+  it(`#${PhotoFrameComponent.prototype.like.name}
+  SHOULD trigger (@Output liked) two times
+  WHEN called outside debounce time`, fakeAsync(() => {
+    fixture.detectChanges();
+    let times = 0;
+    component.liked.subscribe(() => times++);
+    component.like();
+    tick(500);
+    component.like();
+    tick(500);
+    expect(times).toBe(2);
+  }));
 });
