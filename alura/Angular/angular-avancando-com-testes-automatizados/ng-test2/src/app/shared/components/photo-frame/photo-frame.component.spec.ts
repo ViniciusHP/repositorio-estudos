@@ -48,4 +48,13 @@ describe(PhotoFrameComponent.name, () => {
     tick(500);
     expect(times).toBe(2);
   }));
+
+  it(`SHOULD display number of likes
+  WHEN (@Input likes) is increased`, () => {
+    fixture.detectChanges();
+    component.likes++;
+    fixture.detectChanges();
+    const element: HTMLElement = fixture.nativeElement.querySelector('.like-counter');
+		expect(element.textContent.trim()).toBe('1');
+  });
 });
