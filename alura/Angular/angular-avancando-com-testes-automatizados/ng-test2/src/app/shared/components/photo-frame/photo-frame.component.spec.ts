@@ -54,7 +54,24 @@ describe(PhotoFrameComponent.name, () => {
     fixture.detectChanges();
     component.likes++;
     fixture.detectChanges();
-    const element: HTMLElement = fixture.nativeElement.querySelector('.like-counter');
-		expect(element.textContent.trim()).toBe('1');
+    const element: HTMLElement =
+      fixture.nativeElement.querySelector('.like-counter');
+    expect(element.textContent.trim()).toBe('1');
   });
+
+  it(`SHOULD update aria-label
+	WHEN (@Input likes) is incremented`, () => {
+		fixture.detectChanges();
+		component.likes++;
+		fixture.detectChanges();
+		const element: HTMLElement =
+			fixture.nativeElement.querySelector('.like-counter');
+		expect(element.getAttribute('aria-label')).toBe('1: people liked');
+	});
+
+	it(`SHOULD have aria-label with 0 (@Input likes)`, () => {
+		fixture.detectChanges();
+		const element: HTMLElement = fixture.nativeElement.querySelector('.like-counter');
+		expect(element.getAttribute('aria-label')).toBe('0: people liked');
+	})
 });
