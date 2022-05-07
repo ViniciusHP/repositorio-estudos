@@ -1,5 +1,6 @@
 import { Component, ComponentRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ActionDirective } from './action.directive';
 import { ActionModule } from './action.module';
 
@@ -29,8 +30,9 @@ describe(ActionDirective.name, () => {
 
   it(`(D) (@Output appAction) SHOULD emit event with payload
   WHEN clicked`, () => {
-    const divEl: HTMLElement =
-      fixture.nativeElement.querySelector('.dummy-component');
+    /*const divEl: HTMLElement =
+      fixture.nativeElement.querySelector('.dummy-component');*/
+      const divEl = fixture.debugElement.query(By.directive(ActionDirective)).nativeElement;
       const event = new Event('click');
       divEl.dispatchEvent(event);
 
