@@ -27,9 +27,33 @@ describe(PhotoListComponent.name, () => {
 
   it(`(D) SHOULD display board
   WHEN data arrives`, () => {
-    fixture.detectChanges();
     const photos = buildPhotoList();
-    spyOn(service, 'getPhotos')
-      .and.returnValue(of(photos));
+    spyOn(service, 'getPhotos').and.returnValue(of(photos));
+
+    fixture.detectChanges(); // Deve ser chamado após o spyOn, para acionar o ciclo de vida do Angular chamando o método interceptado pelo spyOn
+    const board = fixture.nativeElement.querySelector('app-photo-board');
+    const loader = fixture.nativeElement.querySelector('.loader');
+
+    expect(board)
+      .withContext('SHOULD display board')
+      .not.toBeNull();
+    expect(loader)
+      .withContext('SHOULD not display loader')
+      .toBeNull();
+  });
+
+  it(`(D) SHOULD display loader while waiting for data`, () => {
+    spyOn(service, 'getPhotos').and.returnValue(null);
+
+    fixture.detectChanges(); // Deve ser chamado após o spyOn, para acionar o ciclo de vida do Angular chamando o método interceptado pelo spyOn
+    const board = fixture.nativeElement.querySelector('app-photo-board');
+    const loader = fixture.nativeElement.querySelector('.loader');
+
+    expect(loader)
+      .withContext('SHOULD display loader')
+      .not.toBeNull();
+    expect(board)
+      .withContext('SHOULD not display board')
+      .toBeNull();
   });
 });
