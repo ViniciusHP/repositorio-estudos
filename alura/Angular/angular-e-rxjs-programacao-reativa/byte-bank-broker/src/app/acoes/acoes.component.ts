@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { AcoesService } from './acoes.service';
 import { Acoes } from './modelo/acoes';
 
@@ -11,11 +12,11 @@ import { Acoes } from './modelo/acoes';
 })
 export class AcoesComponent implements OnInit {
   acoesInput = new FormControl();
-  acoes$: Observable<Acoes>;
+  acoes$ = this.acoesInput.valueChanges.pipe(tap(console.log))
 
   constructor(private acoesService: AcoesService) {}
 
   ngOnInit(): void {
-    this.acoes$ = this.acoesService.getAcoes(); 
+    //this.acoes$ = this.acoesService.getAcoes(); 
   }
 }
