@@ -20,17 +20,24 @@ public class Alurator {
 
         Request request = new Request(url);
         String nomeControle = request.getNomeControle();
-
+        String nomeMetodo = request.getNomeMetodo();
 
 //			Class<?> classeControle = Class.forName(pacoteBase + nomeControle);
 //			Object instanciaControle = classeControle.getDeclaredConstructor().newInstance();
-        Object instanciaControle = new Reflexao()
+//        Object instanciaControle = new Reflexao()
+//                .refleteClasse(pacoteBase + nomeControle)
+//                .getContrutorPadrao()
+//                .invoca();
+
+
+        Object retorno = new Reflexao()
                 .refleteClasse(pacoteBase + nomeControle)
-                .getContrutorPadrao()
+                .criaInstancia()
+                .getMetodo(nomeMetodo)
                 .invoca();
 
-        System.out.println(instanciaControle);
+        System.out.println(retorno);
 
-        return null;
+        return retorno;
     }
 }
