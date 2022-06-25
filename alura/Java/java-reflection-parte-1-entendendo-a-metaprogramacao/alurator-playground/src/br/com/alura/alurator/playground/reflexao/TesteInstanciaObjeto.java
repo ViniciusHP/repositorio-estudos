@@ -2,7 +2,7 @@ package br.com.alura.alurator.playground.reflexao;
 
 import br.com.alura.alurator.playground.controle.Controle;
 
-public class TesteIntanciaObjeto {
+public class TesteInstanciaObjeto {
 
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
         Class<Controle> controleClasse1 = Controle.class;
