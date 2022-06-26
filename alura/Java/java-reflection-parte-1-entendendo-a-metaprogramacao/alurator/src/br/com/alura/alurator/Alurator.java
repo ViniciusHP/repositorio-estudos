@@ -5,6 +5,7 @@ import br.com.alura.alurator.reflexao.Reflexao;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 public class Alurator {
 
@@ -15,25 +16,16 @@ public class Alurator {
     }
 
     public Object executa(String url) {
-        // TODO - processa a requisicao executando o metodo
-        // da classe em questao
 
         Request request = new Request(url);
         String nomeControle = request.getNomeControle();
         String nomeMetodo = request.getNomeMetodo();
-
-//			Class<?> classeControle = Class.forName(pacoteBase + nomeControle);
-//			Object instanciaControle = classeControle.getDeclaredConstructor().newInstance();
-//        Object instanciaControle = new Reflexao()
-//                .refleteClasse(pacoteBase + nomeControle)
-//                .getContrutorPadrao()
-//                .invoca();
-
+        Map<String, Object> params = request.getQueryParams();
 
         Object retorno = new Reflexao()
                 .refleteClasse(pacoteBase + nomeControle)
                 .criaInstancia()
-                .getMetodo(nomeMetodo)
+                .getMetodo(nomeMetodo, params)
                 .invoca();
 
         System.out.println(retorno);
