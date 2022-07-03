@@ -20,8 +20,14 @@ public class ManipuladorObjeto {
 //            2.3) E que cada um dos parâmetros tenham os mesmos nomes e tipos iguais aos passados na URL.
 //        3) Lançar uma RuntimeException caso nenhum método seja encontrado
 
+//        /filtra?nome=produto => filtra(String nome)
+//        /filtra?nome=produto&marca=marca 1 => filtro(String nome, String marca)
+//        /filtra?marca=marca 1&nome=produto => filtro(String nome, String marca)
+
         Stream<Method> metodos = Arrays.stream(instancia.getClass().getDeclaredMethods());
-        Method metodoSelecionado = metodos.filter((metodo) -> true)
+        Method metodoSelecionado = metodos.filter((metodo) ->
+                        metodo.getName().equals(nomeMetodo)
+                        && metodo.getParameterCount() == params.values().size())
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Método não encontrado!"));
         try {
