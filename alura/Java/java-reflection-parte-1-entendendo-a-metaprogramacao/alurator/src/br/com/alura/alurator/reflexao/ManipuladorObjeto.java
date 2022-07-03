@@ -29,11 +29,8 @@ public class ManipuladorObjeto {
                         metodo.getName().equals(nomeMetodo)
                         && metodo.getParameterCount() == params.values().size()
                         && Stream.of(metodo.getParameters()).allMatch(arg ->
-                                {
-                                    System.out.println(arg.getName());
-                                    return params.keySet().contains(arg.getName())
-                                            && params.get(arg.getName()).getClass().equals(arg.getType());
-                                }
+                                    params.keySet().contains(arg.getName())
+                                            && params.get(arg.getName()).getClass().equals(arg.getType())
                             ))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Método não encontrado!"));
