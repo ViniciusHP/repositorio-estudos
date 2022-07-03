@@ -27,14 +27,16 @@ public class ManipuladorObjeto {
         Stream<Method> metodos = Arrays.stream(instancia.getClass().getDeclaredMethods());
         Method metodoSelecionado = metodos.filter((metodo) ->
                         metodo.getName().equals(nomeMetodo)
-                        && metodo.getParameterCount() == params.values().size())
+                        && metodo.getParameterCount() == params.values().size()
+                        && Stream.of(metodo.getParameters()).allMatch(arg ->
+                                {
+                                    System.out.println(arg.getName());
+                                    return params.keySet().contains(arg.getName())
+                                            && params.get(arg.getName()).getClass().equals(arg.getType());
+                                }
+                            ))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Método não encontrado!"));
-        try {
-            Method metodo = instancia.getClass().getDeclaredMethod(nomeMetodo);
-            return new ManipuladorMetodo(instancia, metodo);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+        return new ManipuladorMetodo(instancia, metodoSelecionado, params);
     }
 }

@@ -2,20 +2,30 @@ package br.com.alura.alurator.reflexao;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ManipuladorMetodo {
     private Object instancia;
     private Method metodo;
+    private Map<String, Object> params;
 
-    public ManipuladorMetodo(Object instancia, Method metodo) {
+    public ManipuladorMetodo(Object instancia, Method metodo, Map<String, Object> params) {
         this.instancia = instancia;
         this.metodo = metodo;
+        this.params = params;
     }
 
 
     public Object invoca() {
         try {
-            return metodo.invoke(instancia);
+            List<Object> parametros = Stream.of(metodo.getParameters())
+                    .map(p -> params.get(p.getName()))
+                    .collect(Collectors.toList());
+            return metodo.invoke(instancia, parametros.toArray());
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
