@@ -18,10 +18,6 @@ public class ProdutoController {
 		return produtoDao.lista();
 	}
 	
-	public Produto obtem(Integer id) {
-		return produtoDao.getProduto(id);
-	}
-	
 	public List<Produto> filtra(String nome) {
 		return produtoDao.lista().stream()
 							.filter(produto -> produto.getNome().toLowerCase().startsWith(nome.toLowerCase()))
