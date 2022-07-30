@@ -1,9 +1,17 @@
 package br.com.alura.alurator.playground.modelo;
 
+import br.com.alura.alurator.playground.anotacao.NomeTagXML;
+
+@NomeTagXML("produto")
 public class Produto extends SuperProduto{
 
+    @NomeTagXML("n")
     private String nome;
+
+    @NomeTagXML("v")
     private double valor;
+
+    @NomeTagXML("m")
     private String marca;
 
     public Produto(String nome, double valor, String marca) {
