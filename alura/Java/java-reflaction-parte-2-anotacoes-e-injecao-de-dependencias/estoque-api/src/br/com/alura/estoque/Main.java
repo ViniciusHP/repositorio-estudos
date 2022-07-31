@@ -1,5 +1,6 @@
 package br.com.alura.estoque;
 
+import java.util.List;
 import java.util.Scanner;
 
 import br.com.alura.alurator.Alurator;
@@ -13,7 +14,7 @@ public class Main {
 	 * 
 	 */
 	public static void main(String[] args) throws Exception {
-		
+
 		/*
 		 * Casos possiveis:
 		 * /controlador/metodo

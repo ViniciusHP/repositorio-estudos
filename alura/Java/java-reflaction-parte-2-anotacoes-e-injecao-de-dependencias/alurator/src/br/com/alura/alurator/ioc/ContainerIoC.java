@@ -44,17 +44,16 @@ public class ContainerIoC {
         }
     }
 
-    public void registra(Class<?> tipoFonte, Class<?> tipoDestino) {
+    public <T, K extends T> void registra(Class<T> tipoFonte, Class<K> tipoDestino) {
 
-        boolean compativel = verificaCompatibilidade(tipoFonte, tipoDestino);
 
-        if(!compativel) throw  new ClassCastException("Não é possível resolver " + tipoFonte.getName() + " para " + tipoDestino.getName());
-
-        // tipoFonte=List, tipoDestino=String
+        /* Comentado, pois foi tratado pelo generics, fazendo com que caso seja informado tipos incompatíveis, em tempo de desenvolvimento nós sejamos informados */
+//        boolean compativel = verificaCompatibilidade(tipoFonte, tipoDestino);
+//        if(!compativel) throw  new ClassCastException("Não é possível resolver " + tipoFonte.getName() + " para " + tipoDestino.getName());
         mapaDeTipos.put(tipoFonte, tipoDestino);
     }
 
-    private boolean verificaCompatibilidade(Class<?> tipoFonte, Class<?> tipoDestino) {
+//    private boolean verificaCompatibilidade(Class<?> tipoFonte, Class<?> tipoDestino) {
         // verifica se tipoDestino é compatível com tipoDestino na raça
 //        boolean compativel;
 //
@@ -70,6 +69,6 @@ public class ContainerIoC {
 
         // verificar compatibilidade com API de Reflection
         // neste método será tentado converter para o tipo informado, se der certo, retorna true, senão, false
-        return tipoFonte.isAssignableFrom(tipoDestino);
-    }
+//        return tipoFonte.isAssignableFrom(tipoDestino);
+//    }
 }
