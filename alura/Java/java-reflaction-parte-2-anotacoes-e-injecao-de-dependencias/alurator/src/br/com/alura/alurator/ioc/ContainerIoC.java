@@ -46,7 +46,30 @@ public class ContainerIoC {
 
     public void registra(Class<?> tipoFonte, Class<?> tipoDestino) {
 
+        boolean compativel = verificaCompatibilidade(tipoFonte, tipoDestino);
+
+        if(!compativel) throw  new ClassCastException("Não é possível resolver " + tipoFonte.getName() + " para " + tipoDestino.getName());
+
         // tipoFonte=List, tipoDestino=String
         mapaDeTipos.put(tipoFonte, tipoDestino);
+    }
+
+    private boolean verificaCompatibilidade(Class<?> tipoFonte, Class<?> tipoDestino) {
+        // verifica se tipoDestino é compatível com tipoDestino na raça
+//        boolean compativel;
+//
+//        if(tipoFonte.isInterface()) {
+//            compativel = Stream.of(tipoDestino.getInterfaces())
+//                    .anyMatch((interfaceImplementada) -> interfaceImplementada.equals(tipoFonte));
+//        } else {
+//            compativel = tipoDestino.getSuperclass().equals(tipoFonte)
+//                            || tipoDestino.equals(tipoFonte);
+//        }
+//
+//        return compativel;
+
+        // verificar compatibilidade com API de Reflection
+        // neste método será tentado converter para o tipo informado, se der certo, retorna true, senão, false
+        return tipoFonte.isAssignableFrom(tipoDestino);
     }
 }
