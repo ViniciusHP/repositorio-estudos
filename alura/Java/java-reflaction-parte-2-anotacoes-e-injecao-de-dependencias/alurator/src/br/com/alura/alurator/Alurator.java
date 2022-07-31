@@ -44,4 +44,8 @@ public class Alurator {
 
         return retorno;
     }
+
+    public void registra(Class<?> tipoFonte, Class<?> tipoDestino) {
+        containerIoC.registra(tipoFonte, tipoDestino);
+    }
 }
