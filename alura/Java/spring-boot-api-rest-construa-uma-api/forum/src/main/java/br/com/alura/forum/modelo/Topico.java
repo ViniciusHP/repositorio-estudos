@@ -1,9 +1,6 @@
 package br.com.alura.forum.modelo;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,6 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Topico {
     private Long id;
     private String titulo;
@@ -22,4 +21,10 @@ public class Topico {
     private Usuario autor;
     private Curso curso;
     private List<Resposta> respostas = new ArrayList<>();
+
+    public Topico(String titulo, String mensagem, Curso curso) {
+        this.titulo = titulo;
+        this.mensagem = mensagem;
+        this.curso = curso;
+    }
 }

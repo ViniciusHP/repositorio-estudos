@@ -1,12 +1,12 @@
 package br.com.alura.forum.modelo;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
     private Long id;
     private String nome;
