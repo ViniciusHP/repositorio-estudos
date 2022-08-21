@@ -20,19 +20,19 @@ public class AtualizacaoTopicoForm {
     @Size(min = 5)
     private String titulo;
 
-    @NotNull @NotEmpty @Size(min = 10)
+    @NotNull
+    @NotEmpty
+    @Size(min = 10)
     private String mensagem;
 
     public TopicoDTO atualizar(Long id, TopicoRepository topicoRepository) {
         Optional<Topico> optionalTopico = topicoRepository.findById(id);
 
-        if(optionalTopico.isPresent()) {
-            Topico topico = optionalTopico.get();
-            topico.setMensagem(this.mensagem);
-            topico.setTitulo(this.titulo);
-            return new TopicoDTO(topico);
-        }
-
-        return null;
+        return optionalTopico.map((topico) -> {
+                    topico.setMensagem(this.mensagem);
+                    topico.setTitulo(this.titulo);
+                    return new TopicoDTO(topico);
+                })
+                .orElse(null);
     }
 }

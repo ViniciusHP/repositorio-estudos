@@ -71,8 +71,12 @@ public class TopicosController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        topicoRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        Optional<Topico> optionalTopico = topicoRepository.findById(id);
+
+        return optionalTopico.map((topico) -> {
+            topicoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
