@@ -1,5 +1,6 @@
 package br.com.alura.forum.controller;
 
+import br.com.alura.forum.controller.dto.DetalhesDoTopicoDTO;
 import br.com.alura.forum.controller.dto.TopicoDto;
 import br.com.alura.forum.controller.form.TopicoForm;
 import br.com.alura.forum.controller.repository.CursoRepository;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
@@ -45,5 +47,15 @@ public class TopicosController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(new TopicoDto(topico));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalhesDoTopicoDTO> detalhar(@PathVariable Long id) {
+        Optional<Topico> optionalTopico = topicoRepository.findById(id);
+
+        return optionalTopico
+                .map(topico -> ResponseEntity.ok(new DetalhesDoTopicoDTO(topico)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 }
