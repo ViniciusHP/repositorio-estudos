@@ -1,8 +1,8 @@
 package br.com.alura.forum.controller.form;
 
-import br.com.alura.forum.controller.repository.CursoRepository;
 import br.com.alura.forum.modelo.Curso;
 import br.com.alura.forum.modelo.Topico;
+import br.com.alura.forum.repository.CursoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,13 +19,18 @@ import java.util.Optional;
 @NoArgsConstructor
 public class TopicoForm {
 
-    @NotNull @NotEmpty @Size(min = 5)
+    @NotNull
+    @NotEmpty
+    @Size(min = 5)
     private String titulo;
 
-    @NotNull @NotEmpty @Size(min = 10)
+    @NotNull
+    @NotEmpty
+    @Size(min = 10)
     private String mensagem;
 
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     private String nomeCurso;
 
     public Topico converter(CursoRepository repository) {
