@@ -8,6 +8,7 @@ import br.com.alura.forum.controller.repository.CursoRepository;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -46,6 +47,7 @@ public class TopicosController {
     }*/
 
     @GetMapping()
+    @Cacheable(value = "listaDeTopicos")
     public Page<TopicoDTO> lista(@RequestParam(required = false) String nomeCurso,
                                  @PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 10) Pageable paginacao) {
         /* Para funcionar a passagem do pageable, é necessário da anotação @EnableSpringDataWebSupport */
