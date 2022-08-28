@@ -7,6 +7,7 @@ import br.com.alura.forum.controller.form.TopicoForm;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -68,6 +69,8 @@ public class TopicosController {
 
     }
 
+    @Operation(summary = "Cadastrar tópico", description = "Cadastrar tópico")
+    //@SecurityRequirement(name = "Bearer Authentication")
     @PostMapping()
     @Transactional
     @CacheEvict(value = "listaDeTopicos", allEntries = true)
@@ -82,6 +85,8 @@ public class TopicosController {
         return ResponseEntity.created(uri).body(new TopicoDTO(topico));
     }
 
+    @Operation(summary = "Alterar tópico", description = "Alterar tópico")
+    //@SecurityRequirement(name = "Bearer Authentication")
     @PutMapping("/{id}")
     @Transactional
     @CacheEvict(value = "listaDeTopicos", allEntries = true)
@@ -93,6 +98,8 @@ public class TopicosController {
                 : ResponseEntity.ok(topico);
     }
 
+    @Operation(summary = "Excluir tópico", description = "Excluir tópico")
+    //@SecurityRequirement(name = "Bearer Authentication")
     @DeleteMapping("/{id}")
     @Transactional
     @CacheEvict(value = "listaDeTopicos", allEntries = true)
