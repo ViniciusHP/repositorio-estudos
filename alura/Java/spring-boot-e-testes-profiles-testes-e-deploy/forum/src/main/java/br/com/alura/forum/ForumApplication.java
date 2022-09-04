@@ -8,10 +8,14 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 @SpringBootApplication
 @EnableSpringDataWebSupport
 @EnableCaching
-public class ForumApplication {
+public class ForumApplication /*extends SpringBootServletInitializer */ {
 
     public static void main(String[] args) {
         SpringApplication.run(ForumApplication.class, args);
     }
 
+    /*@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(ForumApplication.class);
+    }*/
 }

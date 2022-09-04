@@ -24,3 +24,44 @@ $ export FORUM_JWT_SECRET=123456
 ```bash
 $ java -jar -Dspring.profiles.active=prod -DFORUM_DATABASE_URL=jdbc:h2:mem:alura-forum -DFORUM_DATABASE_USERNAME=sa -DFORUM_DATABASE_PASSWORD= -DFORUM_JWT_SECRET=123456 ./target/forum.jar
 ```
+
+# Gerando arquivo WAR
+
+É necessário modificar o arquivo `pom.xml`, adicionando a tag:
+
+```xml
+
+<packaging>war</packaging>
+```
+
+e depois adicionar a dependência:
+
+```xml
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-tomcat</artifactId>
+    <scope>provided</scope>
+</dependency>
+```
+
+Por fim, precisamos alterar nossa classe main, fazendo ela estender a classe SpringBootServletInitializer e registrar
+nossa classe no método configure
+
+```java
+
+@SpringBootApplication
+@EnableSpringDataWebSupport
+@EnableCaching
+public class ForumApplication extends SpringBootServletInitializer {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ForumApplication.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(ForumApplication.class);
+    }
+}
+```
