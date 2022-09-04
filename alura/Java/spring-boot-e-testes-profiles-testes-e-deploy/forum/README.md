@@ -34,7 +34,7 @@ $ java -jar -Dspring.profiles.active=prod -DFORUM_DATABASE_URL=jdbc:h2:mem:alura
 <packaging>war</packaging>
 ```
 
-e depois adicionar a dependência:
+e depois adicionar a dependência que indica ao maven que o tomcat será provido, e que não deve ser empacotado junto:
 
 ```xml
 
