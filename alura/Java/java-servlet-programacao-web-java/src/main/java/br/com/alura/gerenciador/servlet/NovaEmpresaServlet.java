@@ -23,16 +23,7 @@ public class NovaEmpresaServlet extends HttpServlet {
 		
 		System.out.println("Cadastrando nova empresa");
 		PrintWriter out = response.getWriter();
-		out.println("<html><body>Empresas cadastradas: ");
-		
-		String listaEmpresas = banco.getEmpresas().stream()
-		.map(Empresa::getNome)
-		.reduce("", (acc, nome) -> {
-			return acc.concat("<br \\>").concat(nome);
-		});
-		
-		out.println(listaEmpresas);
-		
+		out.println("<html><body>Empresa cadastrada: " + nomeEmpresa);
 		out.println("</body></html>");
 	}
 
