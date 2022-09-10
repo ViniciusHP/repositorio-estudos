@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/novaEmpresa")
 public class NovaEmpresaServlet extends HttpServlet {
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nomeEmpresa = request.getParameter("nome");
 		System.out.println("Cadastrando nova empresa");
 		PrintWriter out = response.getWriter();
