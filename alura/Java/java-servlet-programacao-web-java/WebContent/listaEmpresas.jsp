@@ -20,6 +20,9 @@ Na Expression language (<%-- ${} --%>), é possivel acessar propriedades pelo nom
 <title>Java Standard Taglib</title>
 </head>
 <body>
+	<c:if test="${ not empty empresa }">
+		<p>Empresa ${ empresa } cadastrada com sucesso!</p>
+	</c:if>
 	<h2>Lista de empresas:</h2>
 	<ul>
 		<!-- Para referenciar a biblioteca, colocamos o prefixo dela seguido por dois pontos, depois o nome da tag desta biblioteca -->
