@@ -3,15 +3,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!-- Importamos a biblioteca do jstl, a partir do seu nome informado na uri, depois definimos uma prefixo,
 Esse prefixo é adicionado na tag para indicar que a tag faz parte daquela biblioteca
  -->
 <!-- 
-Na Expression language (${}), é possivel acessar propriedades pelo nome dela, não pelo seu getter
- --> -->
-<%
+Na Expression language (<%-- ${} --%>), é possivel acessar propriedades pelo nome dela, não pelo seu getter
+ -->
+<%-- <%
 	List<Empresa> lista = (List<Empresa>) request.getAttribute("empresas"); 
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,8 @@ Na Expression language (${}), é possivel acessar propriedades pelo nome dela, nã
 	<ul>
 		<!-- Para referenciar a biblioteca, colocamos o prefixo dela seguido por dois pontos, depois o nome da tag desta biblioteca -->
 		<c:forEach var="empresa" items="${empresas}">
-			<li>${ empresa.nome }</li>
+			
+			<li>${ empresa.nome } - <fmt:formatDate value="${ empresa.dataAbertura }" pattern="dd/MM/yyyy - HH:mm:ss"/></li>
 		</c:forEach>
 	</ul>
 	
