@@ -17,12 +17,5 @@
 		</label>
 		<button type="submit">Cadastrar</button>
 	</form>
-	<!-- <form action="/gerenciador/novaEmpresa" method="POST">
-		<label>
-			Nome:
-			<input type="text" name="nome" />
-		</label>
-		<button type="submit">Cadastrar</button>
-	</form> -->
 </body>
 </html>

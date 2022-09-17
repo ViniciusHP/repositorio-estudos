@@ -52,4 +52,11 @@ public class Banco {
 		 */
 	}
 
+	public Empresa buscaEmpresaPorId(Integer id) {
+		return lista.stream()
+				.filter(e -> e.getId().equals(id))
+				.findFirst()
+				.orElse(null);
+	}
+
 }
