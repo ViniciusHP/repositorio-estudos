@@ -27,8 +27,10 @@ Na Expression language (<%-- ${} --%>), é possivel acessar propriedades pelo nom
 	<ul>
 		<!-- Para referenciar a biblioteca, colocamos o prefixo dela seguido por dois pontos, depois o nome da tag desta biblioteca -->
 		<c:forEach var="empresa" items="${empresas}">
-			
-			<li>${ empresa.nome } - <fmt:formatDate value="${ empresa.dataAbertura }" pattern="dd/MM/yyyy - HH:mm:ss"/></li>
+			<li>
+				${ empresa.nome } - <fmt:formatDate value="${ empresa.dataAbertura }" pattern="dd/MM/yyyy - HH:mm:ss"/>
+				<a href="/gerenciador/removeEmpresa?id=${empresa.id}">remove</a>
+			</li>
 		</c:forEach>
 	</ul>
 	

@@ -2,6 +2,7 @@ package br.com.alura.gerenciador.servlet;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Banco {
@@ -32,6 +33,23 @@ public class Banco {
 	
 	public List<Empresa> getEmpresas() {
 		return lista;
+	}
+
+	public void removeEmpresa(Integer id) {
+		Iterator<Empresa> it = lista.iterator();
+		
+		while(it.hasNext()) {
+			Empresa emp = it.next();
+			
+			if(emp.getId().equals(id)) {
+				it.remove();
+			}
+		}
+		
+		/*
+		 * lista = lista.stream() .filter(empresa -> !empresa.getId().equals(id))
+		 * .toList();
+		 */
 	}
 
 }
