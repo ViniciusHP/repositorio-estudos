@@ -1,5 +1,6 @@
 package br.com.alura.gerenciador.servlet;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Empresa {
@@ -27,4 +28,9 @@ public class Empresa {
 		this.dataAbertura = dataAbertura;
 	}
 	
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return String.format("Id Empresa: %d,%nNome da Empresa: %s,%nData de abertura: %s", id, nome, sdf.format(dataAbertura));
+	}
 }

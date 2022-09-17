@@ -11,7 +11,7 @@
 </head>
 <body>
 	<form action="${linkServletNovaEmpresa}" method="POST">
-		<input type="text" value="${empresa.id}" hidden="true" />
+		<input type="hidden" name="id" value="${empresa.id}" />
 		<label>
 			Nome: <input type="text" name="nome" value="${empresa.nome}" />
 		</label>
