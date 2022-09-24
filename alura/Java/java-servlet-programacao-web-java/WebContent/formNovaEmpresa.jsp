@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="/novaEmpresa" var="linkServletNovaEmpresa" /> <!-- Usando para pegar o contexto da aplicação dinamicamente -->
+<%-- <c:url value="/novaEmpresa" var="linkServletNovaEmpresa" /> --%> <!-- Usando para pegar o contexto da aplicação dinamicamente -->
+<c:url value="/entrada" var="linkNovaEmpresa" /> <!-- Usando para pegar o contexto da aplicação dinamicamente -->
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${linkServletNovaEmpresa}" method="POST">
+	<form action="${linkNovaEmpresa}" method="POST">
+		<input type="hidden" name="acao" value="NovaEmpresa" />
 		<label>
 			Nome: <input type="text" name="nome" />
 		</label>

@@ -29,8 +29,8 @@ Na Expression language (<%-- ${} --%>), é possivel acessar propriedades pelo nom
 		<c:forEach var="empresa" items="${empresas}">
 			<li>
 				${ empresa.nome } - <fmt:formatDate value="${ empresa.dataAbertura }" pattern="dd/MM/yyyy - HH:mm:ss"/>
-				<a href="/gerenciador/mostraEmpresa?id=${empresa.id}">editar</a>
-				<a href="/gerenciador/removeEmpresa?id=${empresa.id}">remove</a>
+				<a href="/gerenciador/entrada?acao=MostraEmpresa&id=${empresa.id}">editar</a>
+				<a href="/gerenciador/entrada?acao=RemovaEmpresa&id=${empresa.id}">remove</a>
 			</li>
 		</c:forEach>
 	</ul>
