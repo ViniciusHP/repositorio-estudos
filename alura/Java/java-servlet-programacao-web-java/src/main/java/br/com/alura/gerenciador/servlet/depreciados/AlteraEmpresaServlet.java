@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.alura.gerenciador.servlet.depreciados;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -13,14 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
 
-//@WebServlet("/novaEmpresa")
-public class NovaEmpresaServlet extends HttpServlet {
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//@WebServlet("/alteraEmpresa")
+public class AlteraEmpresaServlet extends HttpServlet {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String paramId = request.getParameter("id");
+		Integer id = Integer.valueOf(paramId);
 		String nomeEmpresa = request.getParameter("nome");
 		String paramDataEmpresa = request.getParameter("data");
-		
+
 		Date dataAbertura;
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -28,20 +31,12 @@ public class NovaEmpresaServlet extends HttpServlet {
 		} catch (ParseException e) {
 			throw new ServletException(e);
 		}
-		
-		Empresa empresa = new Empresa();
+
+		Banco banco = new Banco();
+		Empresa empresa = banco.buscaEmpresaPorId(id);
 		empresa.setNome(nomeEmpresa);
 		empresa.setDataAbertura(dataAbertura);
-		
-		Banco banco = new Banco();
-		banco.adiciona(empresa);
-		
-		// chama o JSP
-//		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
-//		request.setAttribute("empresa", empresa.getNome());
-//		rd.forward(request, response);
-		
+
 		response.sendRedirect("listaEmpresas");
 	}
-
 }
