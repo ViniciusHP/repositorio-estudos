@@ -8,6 +8,7 @@
 %> --%>
 <html>
 	<body>
+		<c:import url="logout-parcial.jsp" />
 		<%-- <p>Empresa <% out.println(nomeEmpresa); %> cadastrada com sucesso!</p> --%>
 		<c:if test="${ not empty empresa }">
 			<p>Empresa ${ empresa } cadastrada com sucesso!</p>

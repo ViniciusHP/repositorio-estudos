@@ -20,6 +20,9 @@ Na Expression language (<%-- ${} --%>), é possivel acessar propriedades pelo nom
 <title>Java Standard Taglib</title>
 </head>
 <body>
+
+	<c:import url="logout-parcial.jsp" />
+	
 	Usuário Logado: ${usuarioLogado.login}
 	<br>
 	
