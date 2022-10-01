@@ -70,4 +70,11 @@ public class Banco {
 				.orElse(null);
 	}
 
+	public Usuario existeUsuario(String login, String senha) {
+		return listaUsuarios.stream()
+				.filter(u -> u.ehIgual(login, senha))
+				.findFirst()
+				.orElse(null);
+	}
+
 }
