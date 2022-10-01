@@ -20,6 +20,9 @@ Na Expression language (<%-- ${} --%>), é possivel acessar propriedades pelo nom
 <title>Java Standard Taglib</title>
 </head>
 <body>
+	Usuário Logado: ${usuarioLogado.login}
+	<br>
+	
 	<c:if test="${ not empty empresa }">
 		<p>Empresa ${ empresa } cadastrada com sucesso!</p>
 	</c:if>
