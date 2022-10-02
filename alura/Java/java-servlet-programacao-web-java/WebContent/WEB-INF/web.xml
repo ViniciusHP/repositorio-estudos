@@ -14,4 +14,9 @@
   	<servlet-name>OiMundoServlet</servlet-name>
   	<url-pattern>/ola</url-pattern>
   </servlet-mapping>
+  
+  <session-config>
+    <!-- 10 min -->
+    <session-timeout>10</session-timeout>
+  </session-config> 
 </web-app>

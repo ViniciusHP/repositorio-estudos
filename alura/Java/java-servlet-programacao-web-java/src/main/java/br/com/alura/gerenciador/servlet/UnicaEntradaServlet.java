@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.alura.gerenciador.acao.Acao;
 
-@WebServlet("/entrada")
+@WebServlet(urlPatterns = "/entrada")
 public class UnicaEntradaServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
