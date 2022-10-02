@@ -2,7 +2,9 @@ package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
 import br.com.alura.gerenciador.modelo.Banco;
@@ -23,17 +26,53 @@ public class EmpresasService extends HttpServlet {
 		Banco banco = new Banco();
 		List<Empresa> empresas = banco.getEmpresas();
 		
-//		Gson gson = new Gson();
-//		String resposta = gson.toJson(empresas);
-//		response.setContentType("application/json");
+		String tipoDeValores = request.getHeader("Accept");
 		
-		XStream xstream = new XStream();
-		xstream.alias("empresa", Empresa.class);
-		String resposta = xstream.toXML(empresas);
-		response.setContentType("application/xml");
+		List<String> listaTiposDeValores = new ArrayList<>();
+		
+		if(tipoDeValores != null) {
+			listaTiposDeValores = Stream.of(tipoDeValores.split(","))
+				.map(str -> str.trim())
+				.flatMap(str -> Stream.of(str.split(";")))
+				.map(str -> str.trim())
+				.toList();
+		}
+		System.out.println(listaTiposDeValores);
+		String resposta = null;
+		
+		if(isConteudoXml(listaTiposDeValores)) {
+			XStream xstream = new XStream();
+			xstream.alias("empresa", Empresa.class);
+			resposta = xstream.toXML(empresas);
+			response.setContentType("application/xml");
+		} else if(isConteudoJson(listaTiposDeValores)) {
+			Gson gson = new Gson();
+			resposta = gson.toJson(empresas);
+			response.setContentType("application/json");
+		} else {
+			response.setContentType("application/json");
+			resposta = "{ 'message': 'no content' }";
+		}
 		
 		PrintWriter writer = response.getWriter();
 		writer.print(resposta);
+	}
+	
+	private boolean isConteudoJson(List<String> listaTiposDeValores) {
+		return isConteudoTipo("application/json", listaTiposDeValores);
+	}
+	
+	private boolean isConteudoXml(List<String> listaTiposDeValores) {
+		return isConteudoTipo("application/xml", listaTiposDeValores);
+	}
+	
+	private boolean isConteudoTipo(String tipo, List<String> listaTiposDeValores) {
+		if(tipo == null || listaTiposDeValores == null || listaTiposDeValores.isEmpty()) {
+			return false;
+		}
+		
+		return listaTiposDeValores.stream()
+			.anyMatch(tipoValor -> tipoValor.equalsIgnoreCase(tipo));
 	}
 
 }
