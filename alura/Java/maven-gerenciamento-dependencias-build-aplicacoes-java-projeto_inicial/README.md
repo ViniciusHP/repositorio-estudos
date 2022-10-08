@@ -19,3 +19,18 @@ Roda os testes:
 ```bash
 $ mvn test
 ```
+
+Empacota o projeto:
+```bash
+$ mvn package
+```
+
+Limpa o diretório, roda os testes, empacota o projeto e move o .jar para o repositório local 
+```bash
+$ mvn install
+```
+
+Limpa o diretório, roda os testes, empacota o projeto e move o .jar para um repositório remoto
+```bash
+$ mvn deploy
+```
