@@ -34,3 +34,23 @@ Limpa o diretório, roda os testes, empacota o projeto e move o .jar para um rep
 ```bash
 $ mvn deploy
 ```
+
+# Configurando Proxy no Maven
+Para configurar um proxy para o maven, devemos criar um o arquivo `settings.xml` no diretório `.m2`:
+
+````xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <proxies>
+        <proxy>
+            <id>meu-proxy</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>http://ip</host>
+            <port>3128</port>
+            <username>username</username>
+            <password>password</password>
+        </proxy>
+    </proxies>
+</settings>
+````
