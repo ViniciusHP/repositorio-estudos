@@ -7,10 +7,7 @@ import java.sql.*;
 public class Listagem
 {
     public static void main( String[] args ) throws SQLException {
-        String url = "jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC";
-        String usuario = "root";
-        String senha = "root";
-        Connection con = DriverManager.getConnection(url, usuario, senha);
+        Connection con = ConexaoFactory.recuperarConexao();
 
         Statement st = con.createStatement();
         boolean contemRegistros = st.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
