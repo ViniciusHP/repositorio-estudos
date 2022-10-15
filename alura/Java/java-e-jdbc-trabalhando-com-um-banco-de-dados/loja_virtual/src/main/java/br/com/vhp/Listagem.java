@@ -1,5 +1,6 @@
 package br.com.vhp;
 
+import br.com.vhp.db.DB;
 import br.com.vhp.modelo.Produto;
 
 import java.sql.*;
@@ -7,7 +8,7 @@ import java.sql.*;
 public class Listagem
 {
     public static void main( String[] args ) throws SQLException {
-        Connection con = ConexaoFactory.recuperarConexao();
+        Connection con = DB.getConnection();
 
         Statement st = con.createStatement();
         boolean contemRegistros = st.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
@@ -23,6 +24,8 @@ public class Listagem
             System.out.println(produto);
         }
 
-        con.close();
+        DB.closeResultSet(rs);
+        DB.closeStatement(st);
+        DB.closeConnection();
     }
 }
