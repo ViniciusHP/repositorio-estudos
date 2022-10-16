@@ -1,7 +1,7 @@
 package br.com.vhp;
 
 import br.com.vhp.db.DB;
-import br.com.vhp.modelo.Produto;
+import br.com.vhp.modelo.entity.Produto;
 
 import java.sql.*;
 

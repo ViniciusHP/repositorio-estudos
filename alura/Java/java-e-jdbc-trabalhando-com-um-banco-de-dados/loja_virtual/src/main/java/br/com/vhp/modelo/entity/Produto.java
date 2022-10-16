@@ -1,4 +1,4 @@
-package br.com.vhp.modelo;
+package br.com.vhp.modelo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
