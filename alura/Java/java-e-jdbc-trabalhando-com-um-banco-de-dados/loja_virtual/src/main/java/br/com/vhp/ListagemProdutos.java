@@ -5,7 +5,7 @@ import br.com.vhp.modelo.entity.Produto;
 
 import java.sql.*;
 
-public class Listagem
+public class ListagemProdutos
 {
     public static void main( String[] args ) throws SQLException {
         Connection con = DB.getConnection();

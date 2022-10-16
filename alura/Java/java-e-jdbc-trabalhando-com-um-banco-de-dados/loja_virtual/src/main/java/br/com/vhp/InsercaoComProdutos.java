@@ -1,13 +1,13 @@
 package br.com.vhp;
 
 import br.com.vhp.modelo.dao.DAOFactory;
-import br.com.vhp.modelo.dao.ProdutoDAO;
+import br.com.vhp.modelo.dao.impl.ProdutoDAO;
 import br.com.vhp.modelo.entity.Produto;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 
-public class InsercaoComProduto {
+public class InsercaoComProdutos {
     public static void main(String[] args) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Produto comoda = Produto.builder()
                 .nome("Cômoda")

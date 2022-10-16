@@ -4,7 +4,7 @@ import br.com.vhp.db.DB;
 
 import java.sql.*;
 
-public class InsersaoComParametros {
+public class InsersaoComParametrosProdutos {
     public static void main(String[] args) throws SQLException {
         try ( Connection con = DB.getConnection()){
             con.setAutoCommit(false);

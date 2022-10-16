@@ -4,7 +4,7 @@ import br.com.vhp.db.DB;
 
 import java.sql.*;
 
-public class Remocao {
+public class RemocaoProdutos {
     public static void main(String[] args) throws SQLException {
         Connection con = DB.getConnection();
         PreparedStatement stm = con.prepareStatement("DELETE FROM PRODUTO WHERE ID = ?");

@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class Produto {
+public class Categoria {
+
     private Integer id;
     private String nome;
-    private String descricao;
 
     @Override
     public String toString() {
-        return String.format("PRODUTO ( ID = %d; NOME = %s; DESCRIÇÃO = %s)", id, nome, descricao);
+        return String.format("CATEGORIA( ID = %d; NOME = %s )", id, nome);
     }
 }

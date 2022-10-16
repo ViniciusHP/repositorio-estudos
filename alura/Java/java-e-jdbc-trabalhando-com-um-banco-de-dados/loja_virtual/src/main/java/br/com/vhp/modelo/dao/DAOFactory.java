@@ -1,6 +1,7 @@
 package br.com.vhp.modelo.dao;
 
 import br.com.vhp.db.DB;
+import br.com.vhp.modelo.dao.impl.ProdutoDAO;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -12,23 +13,25 @@ import java.util.List;
 
 public class DAOFactory {
     public static ProdutoDAO getProdutoDAO() throws SQLException {
-        return new ProdutoDAO(DB.getConnection());
+        return new ProdutoDAO(getConnection());
     }
 
-    public static <T extends DAOInterface> T getDAO(Class<T> daoClass) throws SQLException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Constructor<T>[] declaredConstructors = (Constructor<T>[]) daoClass.getDeclaredConstructors();
+    public static <T extends DAOAbstract> T getDAO(Class<T> daoClass) {
+        return getDAO(daoClass, getConnection());
+    }
 
+    public static <T extends DAOAbstract> T getDAO(Class<T> daoClass, Connection connection) {
+        Constructor<T>[] declaredConstructors = (Constructor<T>[]) daoClass.getDeclaredConstructors();
         for(Constructor<T> c : declaredConstructors) {
             if(isConstructorWithConnectionParameter(c)) {
-                return getNewInstanceDao(c);
+                return getNewInstanceDao(c, connection);
             }
         }
-
         return null;
     }
 
-    public static <T extends DAOInterface> List<T> getDAOsWithSameConnection(Class<T> ...daosClass) throws SQLException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        final Connection connection = DB.getConnection();
+    public static <T extends DAOAbstract> List<T> getDAOsWithSameConnection(Class<T> ...daosClass) {
+        final Connection connection = getConnection();
         return Arrays.asList(daosClass)
                 .stream()
                 .map((daoClass) -> getInstanceWithConnectionParameter(daoClass, connection))
@@ -47,34 +50,38 @@ public class DAOFactory {
     }
 
     private static <T> T getInstanceWithConnectionParameter(Class<T> daoClass) {
-        try {
-            return getInstanceWithConnectionParameter(daoClass, DB.getConnection());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return getInstanceWithConnectionParameter(daoClass, getConnection());
     }
 
     private static <T> T getInstanceWithConnectionParameter(Class<T> daoClass, Connection connection) {
-        try {
-            Constructor<T>[] declaredConstructors = (Constructor<T>[]) daoClass.getDeclaredConstructors();
+        Constructor<T>[] declaredConstructors = (Constructor<T>[]) daoClass.getDeclaredConstructors();
 
-            for(Constructor<T> c : declaredConstructors) {
-                if(isConstructorWithConnectionParameter(c)) {
-                    return getNewInstanceDao(c, connection);
-                }
+        for(Constructor<T> c : declaredConstructors) {
+            if(isConstructorWithConnectionParameter(c)) {
+                return getNewInstanceDao(c, connection);
             }
-        } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
         }
 
         return null;
     }
 
-    private static <T> T getNewInstanceDao(Constructor<T> constructor) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        return getNewInstanceDao(constructor, DB.getConnection());
+    private static <T> T getNewInstanceDao(Constructor<T> constructor) {
+        return getNewInstanceDao(constructor, getConnection());
     }
 
-    private static <T> T getNewInstanceDao(Constructor<T> constructor, Connection connection) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        return constructor.newInstance(connection);
+    private static <T> T getNewInstanceDao(Constructor<T> constructor, Connection connection) {
+        try {
+            return constructor.newInstance(connection);
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Connection getConnection() {
+        try {
+            return DB.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

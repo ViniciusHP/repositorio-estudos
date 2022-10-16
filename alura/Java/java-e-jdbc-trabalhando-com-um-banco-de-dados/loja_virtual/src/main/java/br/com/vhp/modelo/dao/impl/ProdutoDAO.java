@@ -1,14 +1,13 @@
-package br.com.vhp.modelo.dao;
+package br.com.vhp.modelo.dao.impl;
 
-import br.com.vhp.db.DB;
+import br.com.vhp.modelo.dao.DAOAbstract;
 import br.com.vhp.modelo.entity.Produto;
-import lombok.AllArgsConstructor;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoDAO extends DAOInterface{
+public class ProdutoDAO extends DAOAbstract {
 
     public ProdutoDAO(Connection connection) {
         super(connection);

@@ -2,10 +2,10 @@ package br.com.vhp.modelo.dao;
 
 import java.sql.Connection;
 
-public abstract class DAOInterface {
+public abstract class DAOAbstract {
     private Connection connection;
 
-    public DAOInterface(Connection connection) {
+    public DAOAbstract(Connection connection) {
         this.connection = connection;
     }
 
