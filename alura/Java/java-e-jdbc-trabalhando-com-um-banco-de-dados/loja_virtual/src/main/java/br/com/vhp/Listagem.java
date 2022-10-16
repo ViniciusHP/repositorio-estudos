@@ -26,6 +26,6 @@ public class Listagem
 
         DB.closeResultSet(rs);
         DB.closeStatement(st);
-        DB.closeConnection();
+        DB.closeConnection(con);
     }
 }

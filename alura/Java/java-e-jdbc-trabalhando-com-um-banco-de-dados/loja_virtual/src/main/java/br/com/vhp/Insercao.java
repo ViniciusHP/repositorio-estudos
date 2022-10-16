@@ -23,6 +23,6 @@ public class Insercao {
         }
         DB.closeResultSet(rs);
         DB.closeStatement(stm);
-        DB.closeConnection();
+        DB.closeConnection(con);
     }
 }

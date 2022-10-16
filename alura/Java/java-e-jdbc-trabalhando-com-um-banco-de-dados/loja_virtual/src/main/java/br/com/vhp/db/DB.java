@@ -1,33 +1,37 @@
 package br.com.vhp.db;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class DB {
-    private static Connection conn = null;
+    private static DataSource dataSource;
 
-    public static Connection getConnection() {
-        if(conn == null) {
-            try {
-                Properties props = loadProperties();
+    public static Connection getConnection() throws SQLException {
 
-                String url = props.getProperty("dburl");
-                conn = DriverManager.getConnection(url, props);
-            }catch (SQLException e) {
-                throw new DbException(e.getMessage());
-            }
+        if(dataSource == null) {
+            Properties props = loadProperties();
+            ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
+            comboPooledDataSource.setJdbcUrl(props.getProperty("db-url"));
+            comboPooledDataSource.setProperties(props);
+
+            dataSource = comboPooledDataSource;
         }
 
-        return conn;
+        return dataSource.getConnection();
     }
 
-    public static void closeConnection() {
+    public static void closeConnection(Connection conn) {
         if(conn != null) {
             try {
                 conn.close();

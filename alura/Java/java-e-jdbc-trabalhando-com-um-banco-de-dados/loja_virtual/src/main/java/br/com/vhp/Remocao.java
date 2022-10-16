@@ -14,6 +14,6 @@ public class Remocao {
         System.out.println("Quantidade de linhas que foram apagadas: " + linhasApagadas);
 
         DB.closeStatement(stm);
-        DB.closeConnection();
+        DB.closeConnection(con);
     }
 }
