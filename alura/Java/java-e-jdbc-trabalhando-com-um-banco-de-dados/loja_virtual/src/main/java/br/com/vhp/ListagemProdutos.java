@@ -11,7 +11,7 @@ public class ListagemProdutos
         Connection con = DB.getConnection();
 
         Statement st = con.createStatement();
-        boolean contemRegistros = st.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
+        boolean contemRegistros = st.execute("SELECT ID, NOME, DESCRICAO, CATEGORIA_ID FROM PRODUTO");
 
         ResultSet rs = st.getResultSet();
 
@@ -19,8 +19,15 @@ public class ListagemProdutos
             Integer id = rs.getInt("ID");
             String nome = rs.getString("NOME");
             String descricao = rs.getString("DESCRICAO");
+            Integer categoriaId = rs.getInt("CATEGORIA_ID");
 
-            Produto produto = new Produto(id, nome, descricao);
+            Produto produto = Produto.builder()
+                .id(id)
+                .nome(nome)
+                .descricao(descricao)
+                .categoriaId(categoriaId)
+                .build();
+
             System.out.println(produto);
         }
 

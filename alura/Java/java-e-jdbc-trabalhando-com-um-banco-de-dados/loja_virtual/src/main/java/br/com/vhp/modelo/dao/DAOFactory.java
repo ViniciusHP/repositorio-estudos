@@ -30,12 +30,16 @@ public class DAOFactory {
         return null;
     }
 
-    public static <T extends DAOAbstract> List<T> getDAOsWithSameConnection(Class<T> ...daosClass) {
+    public static DAOList getDAOsWithSameConnection(Class<? extends DAOAbstract> ...classes) {
         final Connection connection = getConnection();
-        return Arrays.asList(daosClass)
+        List<? extends DAOAbstract> daos = List.of(classes)
                 .stream()
                 .map((daoClass) -> getInstanceWithConnectionParameter(daoClass, connection))
                 .toList();
+
+        return DAOList.builder()
+                .daos(daos)
+                .build();
     }
 
     private static boolean isConstructorWithConnectionParameter(Constructor<?> c) {

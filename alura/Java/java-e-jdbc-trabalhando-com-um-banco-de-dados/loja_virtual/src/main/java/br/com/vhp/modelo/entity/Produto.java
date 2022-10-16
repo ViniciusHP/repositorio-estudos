@@ -14,8 +14,10 @@ public class Produto {
     private String nome;
     private String descricao;
 
+    private Integer categoriaId;
+
     @Override
     public String toString() {
-        return String.format("PRODUTO ( ID = %d; NOME = %s; DESCRIÇÃO = %s)", id, nome, descricao);
+        return String.format("PRODUTO ( ID = %d; NOME = %s; DESCRIÇÃO = %s; CATEGORIA_ID = %d)", id, nome, descricao, categoriaId);
     }
 }
