@@ -24,6 +24,7 @@ public class DB {
             ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
             comboPooledDataSource.setJdbcUrl(props.getProperty("db-url"));
             comboPooledDataSource.setProperties(props);
+            comboPooledDataSource.setMaxPoolSize(Integer.parseInt(props.getProperty("c3p0.max-pool-size")));
 
             dataSource = comboPooledDataSource;
         }
