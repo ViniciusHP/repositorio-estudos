@@ -13,18 +13,14 @@ import java.util.List;
 public class ListagemCategorias {
 
     public static void main(String[] args) throws SQLException {
-        DAOList daoList = DAOFactory.getDAOsWithSameConnection(CategoriaDAO.class, ProdutoDAO.class);
+        DAOList daoList = DAOFactory.getDAOsWithSameConnection(CategoriaDAO.class);
 
         CategoriaDAO categoriaDAO = daoList.getDao(CategoriaDAO.class);
-        ProdutoDAO produtoDAO = daoList.getDao(ProdutoDAO.class);
+        //ProdutoDAO produtoDAO = daoList.getDao(ProdutoDAO.class);
 
-        categoriaDAO.listar().forEach((c) -> {
-            try {
-                produtoDAO.buscar(c)
-                        .forEach((p) -> System.out.printf("Categoria: %s - Nome produto: %s%n", c.getNome(), p.getNome()));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        categoriaDAO.listarComProdutos().forEach((c) -> {
+            System.out.println(c);
+            c.getProdutos().forEach((p) -> System.out.println("\t" + p));
         });
     }
 }
