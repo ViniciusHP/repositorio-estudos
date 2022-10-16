@@ -5,9 +5,10 @@ import br.com.vhp.db.DB;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
-import java.lang.reflect.TypeVariable;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 public class DAOFactory {
     public static ProdutoDAO getProdutoDAO() throws SQLException {
@@ -26,6 +27,14 @@ public class DAOFactory {
         return null;
     }
 
+    public static <T extends DAOInterface> List<T> getDAOsWithSameConnection(Class<T> ...daosClass) throws SQLException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        final Connection connection = DB.getConnection();
+        return Arrays.asList(daosClass)
+                .stream()
+                .map((daoClass) -> getInstanceWithConnectionParameter(daoClass, connection))
+                .toList();
+    }
+
     private static boolean isConstructorWithConnectionParameter(Constructor<?> c) {
         Parameter[] paramsConstructor = c.getParameters();
 
@@ -37,7 +46,35 @@ public class DAOFactory {
         return parameter.getType().equals(Connection.class);
     }
 
+    private static <T> T getInstanceWithConnectionParameter(Class<T> daoClass) {
+        try {
+            return getInstanceWithConnectionParameter(daoClass, DB.getConnection());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static <T> T getInstanceWithConnectionParameter(Class<T> daoClass, Connection connection) {
+        try {
+            Constructor<T>[] declaredConstructors = (Constructor<T>[]) daoClass.getDeclaredConstructors();
+
+            for(Constructor<T> c : declaredConstructors) {
+                if(isConstructorWithConnectionParameter(c)) {
+                    return getNewInstanceDao(c, connection);
+                }
+            }
+        } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
+
     private static <T> T getNewInstanceDao(Constructor<T> constructor) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        return constructor.newInstance(DB.getConnection());
+        return getNewInstanceDao(constructor, DB.getConnection());
+    }
+
+    private static <T> T getNewInstanceDao(Constructor<T> constructor, Connection connection) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        return constructor.newInstance(connection);
     }
 }
