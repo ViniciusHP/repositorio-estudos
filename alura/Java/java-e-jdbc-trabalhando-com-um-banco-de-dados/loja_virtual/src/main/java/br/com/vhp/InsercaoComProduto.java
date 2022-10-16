@@ -16,6 +16,7 @@ public class InsercaoComProduto {
         ProdutoDAO produtoDAO = DAOFactory.getDAO(ProdutoDAO.class);
         produtoDAO.salvar(comoda);
 
-        System.out.println(comoda);
+        System.out.println("\n### LISTA DE PRODUTOS ###");
+        produtoDAO.listar().forEach(System.out::println);
     }
 }
