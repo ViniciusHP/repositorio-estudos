@@ -31,8 +31,10 @@ public class Produto {
     @Column()
     private LocalDate dataCadastro = LocalDate.now();
 
-    @Column()
-    @Enumerated(EnumType.STRING)
+
+    //@Enumerated(EnumType.STRING)
+    @ManyToOne()
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
