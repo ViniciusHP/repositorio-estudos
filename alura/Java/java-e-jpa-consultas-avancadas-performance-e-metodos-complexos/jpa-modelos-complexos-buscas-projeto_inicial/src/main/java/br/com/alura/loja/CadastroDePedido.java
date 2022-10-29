@@ -1,46 +1,52 @@
 package br.com.alura.loja;
 
 import br.com.alura.loja.dao.CategoriaDAO;
+import br.com.alura.loja.dao.ClienteDAO;
+import br.com.alura.loja.dao.PedidoDAO;
 import br.com.alura.loja.dao.ProdutoDAO;
-import br.com.alura.loja.modelo.Categoria;
-import br.com.alura.loja.modelo.Produto;
+import br.com.alura.loja.modelo.*;
 import br.com.alura.loja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-public class CadastroDeProduto {
-
+public class CadastroDePedido {
     public static void main(String[] args) {
-        cadastrarProduto();
+        popularBanco();
 
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoDAO produtoDAO = new ProdutoDAO(em);
+        ClienteDAO clienteDAO = new ClienteDAO(em);
 
         Produto produto = produtoDAO.buscarPorId(1l);
-        System.out.println(produto.getPreco());
+        Cliente cliente = clienteDAO.buscarPorId(1l);
 
-        List<Produto> todos = produtoDAO.buscarPorNomeCategoria("CELULARES");
-        todos.forEach((p) -> System.out.println(p.getNome()));
+        em.getTransaction().begin();
 
-        BigDecimal precoProduto = produtoDAO.buscarPrecoDoProdutoComNome("Xiaomi Redmi");
-        System.out.println("Preço do produto" + precoProduto);
+
+        Pedido pedido = new Pedido(cliente);
+        pedido.adicionarItem(new ItemPedido(10, pedido, produto));
+
+        PedidoDAO pedidoDAO = new PedidoDAO(em);
+        pedidoDAO.cadastrar(pedido);
+
+        em.getTransaction().commit();
     }
 
-    public static void cadastrarProduto() {
+    public static void popularBanco() {
         Categoria categoriaCelulares = new Categoria("CELULARES");
         Produto celular = new Produto("Xiaomi Redmi", "Celular lançamento", new BigDecimal(800), categoriaCelulares);
+        Cliente cliente = new Cliente("Rodrigo", "123456");
 
         EntityManager em = JPAUtil.getEntityManager();
         CategoriaDAO categoriaDAO = new CategoriaDAO(em);
         ProdutoDAO produtoDAO = new ProdutoDAO(em);
+        ClienteDAO clienteDAO = new ClienteDAO(em);
 
         em.getTransaction().begin();
         categoriaDAO.cadastrar(categoriaCelulares);
         produtoDAO.cadastrar(celular);
+        clienteDAO.cadastrar(cliente);
 
         em.getTransaction().commit();
         em.close();
