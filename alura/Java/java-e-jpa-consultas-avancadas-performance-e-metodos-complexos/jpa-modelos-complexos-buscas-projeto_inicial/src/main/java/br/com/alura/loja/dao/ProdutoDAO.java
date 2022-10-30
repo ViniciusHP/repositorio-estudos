@@ -13,6 +13,12 @@ public class ProdutoDAO {
         this.em = em;
     }
 
+    public void cadastrar(Produto ...produtos) {
+        for (Produto produto : produtos) {
+            cadastrar(produto);
+        }
+    }
+
     public void cadastrar(Produto produto) {
         this.em.persist(produto);
     }

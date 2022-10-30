@@ -11,6 +11,12 @@ public class CategoriaDAO {
         this.em = em;
     }
 
+    public void cadastrar(Categoria ...categorias) {
+        for (Categoria categoria : categorias) {
+            cadastrar(categoria);
+        }
+    }
+
     public void cadastrar(Categoria categoria) {
         this.em.persist(categoria);
     }
