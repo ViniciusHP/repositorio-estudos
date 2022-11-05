@@ -34,7 +34,7 @@ public class Produto {
 
 
     //@Enumerated(EnumType.STRING)
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
