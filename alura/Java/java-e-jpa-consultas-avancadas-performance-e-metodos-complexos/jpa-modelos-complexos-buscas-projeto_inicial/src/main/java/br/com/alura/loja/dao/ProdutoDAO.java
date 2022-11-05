@@ -2,8 +2,10 @@ package br.com.alura.loja.dao;
 
 import br.com.alura.loja.modelo.Produto;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ProdutoDAO {
@@ -54,5 +56,41 @@ public class ProdutoDAO {
         return this.em.createNamedQuery("Produto.produtosPorCategoria", Produto.class)
                 .setParameter("nome", nome)
                 .getResultList();
+    }
+
+    public List<Produto> buscarPorParametros(String nome, BigDecimal preco, LocalDate dataCadastro) {
+        String jpql = "SELECT p FROM Produto p WHERE 1=1 ";
+
+        boolean isComFiltroNome = nome != null && !nome.trim().isEmpty();
+        boolean isComFiltroPreco = preco != null;
+        boolean isComFiltroDataCadastro = dataCadastro != null;
+
+        if(isComFiltroNome) {
+            jpql += " AND p.nome = :nome";
+        }
+
+        if(isComFiltroPreco) {
+            jpql += " AND p.preco = :preco";
+        }
+
+        if(isComFiltroDataCadastro) {
+            jpql += " AND p.dataCadastro = :dataCadastro";
+        }
+
+        TypedQuery<Produto> query = em.createQuery(jpql, Produto.class);
+
+        if(isComFiltroNome) {
+            query.setParameter("nome", nome);
+        }
+
+        if(isComFiltroPreco) {
+            query.setParameter("preco", preco);
+        }
+
+        if(isComFiltroDataCadastro) {
+            query.setParameter("dataCadastro", dataCadastro);
+        }
+
+        return query.getResultList();
     }
 }
