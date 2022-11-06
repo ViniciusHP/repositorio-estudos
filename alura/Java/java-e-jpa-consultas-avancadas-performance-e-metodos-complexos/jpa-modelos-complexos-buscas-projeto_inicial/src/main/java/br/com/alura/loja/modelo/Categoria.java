@@ -12,12 +12,18 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Categoria {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
+    @EmbeddedId
+    private CategoriaId categoriaId;
 
     public Categoria(String nome) {
-        this.nome = nome;
+        this.categoriaId = new CategoriaId(nome, "GERAL");
+    }
+
+    public String getNome() {
+        return this.categoriaId.getNome();
+    }
+
+    public void setNome(String nome) {
+        this.categoriaId.setNome(nome);
     }
 }
