@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/alura
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  h2:
+    console:
+      enabled: false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        ddl-auto: update
+        format_sql: true
+        show-sql: true
+        naming-strategy: org.hibernate.cfg.ImproveNamingStrategy
+      jdbc:
+        lob:
+          non_contextual_creation: true # Para evitar problemas de versões do postgres
