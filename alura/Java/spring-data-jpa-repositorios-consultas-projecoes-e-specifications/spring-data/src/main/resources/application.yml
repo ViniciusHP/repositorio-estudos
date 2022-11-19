@@ -7,10 +7,9 @@ spring:
     testWhileIdle: true
     validationQuery: SELECT 1
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL10Dialect
-        ddl-auto: update
-        format_sql: true
-        show-sql: true
-        naming-strategy: org.hibernate.cfg.ImproveNamingStrategy
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+      ddl-auto: update
+      format_sql: true
+      naming-strategy: org.hibernate.cfg.ImproveNamingStrategy
