@@ -1,7 +1,5 @@
 package br.com.alura.spring.data;
 
-import br.com.alura.spring.data.orm.Cargo;
-import br.com.alura.spring.data.repository.CargoRepository;
 import br.com.alura.spring.data.service.CrudCargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -31,7 +29,7 @@ public class SpringDataApplication implements CommandLineRunner {
 		Scanner scanner = new Scanner(System.in);
 
 		while (system) {
-			System.out.println("Qual ação você quer executar?");
+			System.out.println("Qual ação você deseja executar?");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Cargo");
 
