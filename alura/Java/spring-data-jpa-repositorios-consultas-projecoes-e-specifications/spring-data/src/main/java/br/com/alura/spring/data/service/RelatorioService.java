@@ -27,11 +27,13 @@ public class RelatorioService implements OpcoesInterface {
             System.out.println("0 - Sair");
             System.out.println("1 - Buscar funcionário por nome");
             System.out.println("2 - Buscar funcionário por nome, data de contratação e salário maior");
+            System.out.println("3 - Buscar funcionário por data de contratação");
             int action = scanner.nextInt();
 
             switch (action) {
                 case 1 -> buscaFuncionarioPorNome(scanner);
                 case 2 -> buscaNomeSalarioMaiorDataContratacao(scanner);
+                case 3 -> buscaFuncionarioDataContratacao(scanner);
                 default -> system = false;
             }
         }
@@ -58,5 +60,13 @@ public class RelatorioService implements OpcoesInterface {
 
         List<Funcionario> funcinarios = funcionarioRepository.findNomeSalarioMaiorDataContratacao(nome, salario, dataContratacao);
         funcinarios.forEach(System.out::println);
+    }
+
+    private void buscaFuncionarioDataContratacao(ScannerWrapper scanner) {
+        System.out.println("Qual data de contratação deseja pesquisar: ");
+        String data = scanner.nextLine();
+        LocalDate dataContratacao = LocalDateUtils.parse(data);
+        List<Funcionario> funcionarios = funcionarioRepository.findDataContratacaoMaior(dataContratacao);
+        funcionarios.forEach(System.out::println);
     }
 }

@@ -6,6 +6,7 @@ import br.com.alura.spring.data.repository.CargoRepository;
 import br.com.alura.spring.data.repository.FuncionarioRepository;
 import br.com.alura.spring.data.repository.UnidadeDeTrabalhoRepository;
 import br.com.alura.spring.data.service.abstractions.CrudServiceAbstract;
+import br.com.alura.spring.data.util.LocalDateUtils;
 import br.com.alura.spring.data.util.ScannerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,6 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class CrudFuncionarioService extends CrudServiceAbstract {
-
-    private SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
     @Autowired
     private FuncionarioRepository funcionarioRepository;
     @Autowired
@@ -89,16 +88,7 @@ public class CrudFuncionarioService extends CrudServiceAbstract {
 
         System.out.println("Informe a data de contratação no formato 'dd/MM/yyyy': ");
         String strDataContratacao = scanner.nextLine();
-        LocalDate dataContratacao = LocalDate.now();
-
-        try {
-            Date data = dt.parse(strDataContratacao);
-            dataContratacao = Instant.ofEpochMilli(data.getTime())
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        LocalDate dataContratacao = LocalDateUtils.parse(strDataContratacao);
 
         System.out.println("Informe id do cargo ocupado: ");
         int cargoId = scanner.nextInt();
