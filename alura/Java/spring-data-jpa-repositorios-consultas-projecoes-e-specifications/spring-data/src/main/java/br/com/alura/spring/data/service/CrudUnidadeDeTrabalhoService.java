@@ -2,18 +2,22 @@ package br.com.alura.spring.data.service;
 
 import br.com.alura.spring.data.orm.UnidadeDeTrabalho;
 import br.com.alura.spring.data.repository.UnidadeDeTrabalhoRepository;
+import br.com.alura.spring.data.service.abstractions.CrudServiceAbstract;
 import br.com.alura.spring.data.util.ScannerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Scanner;
 
 @Service
-public class CrudUnidadeDeTrabalhoService extends CrudServiceAbstract{
+public class CrudUnidadeDeTrabalhoService extends CrudServiceAbstract {
 
     @Autowired
     private UnidadeDeTrabalhoRepository unidadeDeTrabalhoRepository;
+
+    public CrudUnidadeDeTrabalhoService() {
+        super("Qual ação de Unidade de Trabalho deseja executar?");
+    }
 
     @Override
     protected void salvar(ScannerWrapper scanner) {

@@ -1,17 +1,21 @@
-package br.com.alura.spring.data.service;
+package br.com.alura.spring.data.service.abstractions;
 
 import br.com.alura.spring.data.util.ScannerWrapper;
 
-import java.util.Scanner;
-
-public abstract class CrudServiceAbstract {
+public abstract class CrudServiceAbstract implements OpcoesInterface {
 
     private boolean system = true;
 
-    public void inicial(ScannerWrapper scanner) {
+    private final String mensagemInicialMenu;
+
+    public CrudServiceAbstract(String mensagemInicialMenu) {
+        this.mensagemInicialMenu = mensagemInicialMenu;
+    }
+
+    public void opcoes(ScannerWrapper scanner) {
         system = true;
         while(system) {
-            System.out.println("Qual ação de cargo deseja executar?");
+            System.out.println(this.mensagemInicialMenu);
             System.out.println("0 - Sair");
             System.out.println("1 - Salvar");
             System.out.println("2 - Atualizar");

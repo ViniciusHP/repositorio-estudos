@@ -2,60 +2,29 @@ package br.com.alura.spring.data.service;
 
 import br.com.alura.spring.data.orm.Cargo;
 import br.com.alura.spring.data.repository.CargoRepository;
+import br.com.alura.spring.data.service.abstractions.CrudServiceAbstract;
+import br.com.alura.spring.data.service.abstractions.OpcoesInterface;
 import br.com.alura.spring.data.util.ScannerWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Scanner;
 
 @Service
-public class CrudCargoService {
+public class CrudCargoService extends CrudServiceAbstract {
 
-    private final CargoRepository cargoRepository;
+    @Autowired
+    private CargoRepository cargoRepository;
 
     private boolean system = true;
 
-    public CrudCargoService(CargoRepository repository) {
-        this.cargoRepository = repository;
+    public CrudCargoService() {
+        super("Qual ação de Cargo deseja executar?");
     }
 
-    public void inicial(ScannerWrapper scanner) {
-        system = true;
-        while(system) {
-            System.out.println("Qual ação de cargo deseja executar?");
-            System.out.println("0 - Sair");
-            System.out.println("1 - Salvar");
-            System.out.println("2 - Atualizar");
-            System.out.println("3 - Visualizar");
-            System.out.println("4 - Deletar");
-
-            int action = scanner.nextInt();
-
-            switch (action) {
-                case 1:
-                    salvar(scanner);
-                    break;
-
-                case 2:
-                    atualizar(scanner);
-                    break;
-
-                case 3:
-                    visualizar();
-                    break;
-
-                case 4:
-                    deletar(scanner);
-                    break;
-
-                default:
-                    system = false;
-                    break;
-            }
-        }
-    }
-
-    private void salvar(ScannerWrapper scanner) {
+    @Override
+    protected void salvar(ScannerWrapper scanner) {
         System.out.println("Descrição do cargo: ");
         String descricao = scanner.next();
         Cargo cargo = new Cargo();
@@ -64,7 +33,8 @@ public class CrudCargoService {
         System.out.println("Salvo");
     }
 
-    private void atualizar(ScannerWrapper scanner) {
+    @Override
+    protected void atualizar(ScannerWrapper scanner) {
         System.out.println("Id do cargo: ");
         int id = scanner.nextInt();
 
@@ -85,12 +55,14 @@ public class CrudCargoService {
         System.out.println("Cargo editado com sucesso!");
     }
 
-    private void visualizar() {
+    @Override
+    protected void visualizar() {
         Iterable<Cargo> cargos = cargoRepository.findAll();
         cargos.forEach(System.out::println);
     }
 
-    private void deletar(ScannerWrapper scanner) {
+    @Override
+    protected void deletar(ScannerWrapper scanner) {
         System.out.println("Id do cargo: ");
         int id = scanner.nextInt();
         cargoRepository.deleteById(id);

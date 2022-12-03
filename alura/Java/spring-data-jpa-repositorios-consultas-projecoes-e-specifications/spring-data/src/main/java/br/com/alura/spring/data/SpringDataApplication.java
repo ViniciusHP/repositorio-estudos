@@ -3,6 +3,8 @@ package br.com.alura.spring.data;
 import br.com.alura.spring.data.service.CrudCargoService;
 import br.com.alura.spring.data.service.CrudFuncionarioService;
 import br.com.alura.spring.data.service.CrudUnidadeDeTrabalhoService;
+import br.com.alura.spring.data.service.RelatorioService;
+import br.com.alura.spring.data.service.abstractions.OpcoesInterface;
 import br.com.alura.spring.data.util.ScannerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,11 +24,14 @@ public class SpringDataApplication implements CommandLineRunner {
 
 	private CrudFuncionarioService funcionarioService;
 
+	private RelatorioService relatorioService;
+
 	@Autowired
-	public SpringDataApplication(CrudCargoService cargoService, CrudUnidadeDeTrabalhoService unidadeDeTrabalhoService, CrudFuncionarioService funcionarioService) {
+	public SpringDataApplication(CrudCargoService cargoService, CrudUnidadeDeTrabalhoService unidadeDeTrabalhoService, CrudFuncionarioService funcionarioService, RelatorioService relatorioService) {
 		this.cargoService = cargoService;
 		this.unidadeDeTrabalhoService = unidadeDeTrabalhoService;
 		this.funcionarioService = funcionarioService;
+		this.relatorioService = relatorioService;
 	}
 
 	public static void main(String[] args) {
@@ -43,14 +48,23 @@ public class SpringDataApplication implements CommandLineRunner {
 			System.out.println("1 - Cargo");
 			System.out.println("2 - Unidade de trabalho");
 			System.out.println("3 - Funcionário");
+			System.out.println("4 - Relatório");
 
 			int action = scanner.nextInt();
 
+
+
+			OpcoesInterface opcaoInterface = null;
 			switch (action) {
-				case 1 -> cargoService.inicial(scanner);
-				case 2 -> unidadeDeTrabalhoService.inicial(scanner);
-				case 3 -> funcionarioService.inicial(scanner);
+				case 1 -> opcaoInterface = cargoService;
+				case 2 -> opcaoInterface = unidadeDeTrabalhoService;
+				case 3 -> opcaoInterface = funcionarioService;
+				case 4 -> opcaoInterface = relatorioService;
 				default -> system = false;
+			}
+
+			if(opcaoInterface != null) {
+				opcaoInterface.opcoes(scanner);
 			}
 		}
 		scanner.close();

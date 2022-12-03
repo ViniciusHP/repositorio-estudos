@@ -5,6 +5,7 @@ import br.com.alura.spring.data.orm.UnidadeDeTrabalho;
 import br.com.alura.spring.data.repository.CargoRepository;
 import br.com.alura.spring.data.repository.FuncionarioRepository;
 import br.com.alura.spring.data.repository.UnidadeDeTrabalhoRepository;
+import br.com.alura.spring.data.service.abstractions.CrudServiceAbstract;
 import br.com.alura.spring.data.util.ScannerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class CrudFuncionarioService extends CrudServiceAbstract{
+public class CrudFuncionarioService extends CrudServiceAbstract {
 
     private SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
     @Autowired
@@ -32,6 +33,10 @@ public class CrudFuncionarioService extends CrudServiceAbstract{
     private CargoRepository cargoRepository;
     @Autowired
     private UnidadeDeTrabalhoRepository unidadeDeTrabalhoRepository;
+
+    public CrudFuncionarioService() {
+        super("Qual ação de Funcionário deseja executar?");
+    }
 
     @Override
     protected void salvar(ScannerWrapper scanner) {
