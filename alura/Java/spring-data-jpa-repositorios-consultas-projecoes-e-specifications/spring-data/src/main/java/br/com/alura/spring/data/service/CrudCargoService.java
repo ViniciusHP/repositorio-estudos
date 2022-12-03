@@ -56,7 +56,7 @@ public class CrudCargoService extends CrudServiceAbstract {
     }
 
     @Override
-    protected void visualizar() {
+    protected void visualizar(ScannerWrapper scanner) {
         Iterable<Cargo> cargos = cargoRepository.findAll();
         cargos.forEach(System.out::println);
     }

@@ -34,7 +34,7 @@ public abstract class CrudServiceAbstract implements OpcoesInterface {
                     break;
 
                 case 3:
-                    visualizar();
+                    visualizar(scanner);
                     break;
 
                 case 4:
@@ -52,7 +52,7 @@ public abstract class CrudServiceAbstract implements OpcoesInterface {
 
     protected abstract void atualizar(ScannerWrapper scanner);
 
-    protected abstract void visualizar();
+    protected abstract void visualizar(ScannerWrapper scanner);
 
     protected abstract void deletar(ScannerWrapper scanner);
 }

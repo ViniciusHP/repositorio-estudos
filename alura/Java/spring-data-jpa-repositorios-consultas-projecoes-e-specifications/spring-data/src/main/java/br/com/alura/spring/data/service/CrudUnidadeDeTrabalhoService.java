@@ -64,7 +64,7 @@ public class CrudUnidadeDeTrabalhoService extends CrudServiceAbstract {
     }
 
     @Override
-    protected void visualizar() {
+    protected void visualizar(ScannerWrapper scanner) {
         Iterable<UnidadeDeTrabalho> unidadesDeTrabalho = unidadeDeTrabalhoRepository.findAll();
         unidadesDeTrabalho.forEach(System.out::println);
     }

@@ -9,6 +9,10 @@ import br.com.alura.spring.data.service.abstractions.CrudServiceAbstract;
 import br.com.alura.spring.data.util.LocalDateUtils;
 import br.com.alura.spring.data.util.ScannerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -63,8 +67,17 @@ public class CrudFuncionarioService extends CrudServiceAbstract {
     }
 
     @Override
-    protected void visualizar() {
-        Iterable<Funcionario> todosFuncionarios = funcionarioRepository.findAll();
+    protected void visualizar(ScannerWrapper scanner) {
+        System.out.println("Qual página deseja visualizar: ");
+        int pagina = scanner.nextInt();
+
+        Pageable pageable = PageRequest.of(pagina, 5, Sort.unsorted());
+
+        Page<Funcionario> todosFuncionarios = funcionarioRepository.findAll(pageable);
+
+        System.out.println("Número de páginas: " + todosFuncionarios.getTotalPages());
+        System.out.println("Página atual: " + todosFuncionarios.getNumber());
+        System.out.println("Número total de elementos na tabela: " + todosFuncionarios.getTotalElements());
         todosFuncionarios.forEach(System.out::println);
     }
 
