@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -71,7 +72,7 @@ public class CrudFuncionarioService extends CrudServiceAbstract {
         System.out.println("Qual página deseja visualizar: ");
         int pagina = scanner.nextInt();
 
-        Pageable pageable = PageRequest.of(pagina, 5, Sort.unsorted());
+        Pageable pageable = PageRequest.of(pagina, 5, Sort.by(Sort.Direction.ASC, "nome"));
 
         Page<Funcionario> todosFuncionarios = funcionarioRepository.findAll(pageable);
 
