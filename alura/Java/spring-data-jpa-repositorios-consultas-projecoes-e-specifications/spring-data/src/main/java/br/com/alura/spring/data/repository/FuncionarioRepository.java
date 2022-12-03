@@ -19,8 +19,18 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario, Long>
         Funcionario f
         WHERE f.nome = :nome
             AND f.salario >= :salario
-            AND f.data_contratacao = :dataContratacao
+            AND f.dataContratacao = :dataContratacao
     """)
     List<Funcionario> findNomeSalarioMaiorDataContratacao(String nome, BigDecimal salario, LocalDate dataContratacao);
     List<Funcionario> findByNomeAndSalarioGreaterThanAndDataContratacao(String nome, BigDecimal salario, LocalDate dataContratacao);
+
+
+    @Query("SELECT f FROM Funcionario f JOIN f.cargo c WHERE c.descricao = :descricao")
+    List<Funcionario> findByCargoPelaDescricao(String descricao);
+    List<Funcionario> findByCargoDescricao(String descricao);
+
+    @Query("SELECT f FROM Funcionario f JOIN f.unidadesDeTrabalho u WHERE u.descricao = :descricao")
+    List<Funcionario> findByUnidadesDeTrabalhoPelaDescricao(String descricao);
+    List<Funcionario> findByUnidadesDeTrabalho_Descricao(String descricao);
+
 }
