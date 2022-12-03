@@ -2,6 +2,7 @@ package br.com.alura.spring.data.service;
 
 import br.com.alura.spring.data.orm.Cargo;
 import br.com.alura.spring.data.repository.CargoRepository;
+import br.com.alura.spring.data.util.ScannerWrapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class CrudCargoService {
         this.cargoRepository = repository;
     }
 
-    public void inicial(Scanner scanner) {
+    public void inicial(ScannerWrapper scanner) {
         system = true;
         while(system) {
             System.out.println("Qual ação de cargo deseja executar?");
@@ -54,7 +55,7 @@ public class CrudCargoService {
         }
     }
 
-    private void salvar(Scanner scanner) {
+    private void salvar(ScannerWrapper scanner) {
         System.out.println("Descrição do cargo: ");
         String descricao = scanner.next();
         Cargo cargo = new Cargo();
@@ -63,7 +64,7 @@ public class CrudCargoService {
         System.out.println("Salvo");
     }
 
-    private void atualizar(Scanner scanner) {
+    private void atualizar(ScannerWrapper scanner) {
         System.out.println("Id do cargo: ");
         int id = scanner.nextInt();
 
@@ -89,7 +90,7 @@ public class CrudCargoService {
         cargos.forEach(System.out::println);
     }
 
-    private void deletar(Scanner scanner) {
+    private void deletar(ScannerWrapper scanner) {
         System.out.println("Id do cargo: ");
         int id = scanner.nextInt();
         cargoRepository.deleteById(id);

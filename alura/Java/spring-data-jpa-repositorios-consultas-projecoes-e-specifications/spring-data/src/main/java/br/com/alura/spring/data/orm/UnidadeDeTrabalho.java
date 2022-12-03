@@ -3,32 +3,33 @@ package br.com.alura.spring.data.orm;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "cargos")
+@Table(name = "unidade_trabalho")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Cargo {
+public class UnidadeDeTrabalho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String descricao;
+    private String endereco;
 
-    @OneToMany(mappedBy = "cargo")
+    @ManyToMany(mappedBy = "unidadesDeTrabalho")
     private List<Funcionario> funcionarios = new ArrayList<>();
 
     @Override
     public String toString() {
-        return "Cargo{" +
+        return "UnidadeDeTrabalho{" +
                 "id=" + id +
                 ", descricao='" + descricao + '\'' +
+                ", endereco='" + endereco + '\'' +
                 '}';
     }
 }
