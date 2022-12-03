@@ -3,6 +3,7 @@ package br.com.alura.spring.data.orm;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "cargos")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Cargo {
 
