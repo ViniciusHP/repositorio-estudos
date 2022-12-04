@@ -1,9 +1,6 @@
 package br.com.alura.spring.data;
 
-import br.com.alura.spring.data.service.CrudCargoService;
-import br.com.alura.spring.data.service.CrudFuncionarioService;
-import br.com.alura.spring.data.service.CrudUnidadeDeTrabalhoService;
-import br.com.alura.spring.data.service.RelatorioService;
+import br.com.alura.spring.data.service.*;
 import br.com.alura.spring.data.service.abstractions.OpcoesInterface;
 import br.com.alura.spring.data.util.ScannerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +23,15 @@ public class SpringDataApplication implements CommandLineRunner {
 
 	private RelatorioService relatorioService;
 
+	private RelatorioFuncionarioDinamico relatorioFuncionarioDinamico;
+
 	@Autowired
-	public SpringDataApplication(CrudCargoService cargoService, CrudUnidadeDeTrabalhoService unidadeDeTrabalhoService, CrudFuncionarioService funcionarioService, RelatorioService relatorioService) {
+	public SpringDataApplication(CrudCargoService cargoService, CrudUnidadeDeTrabalhoService unidadeDeTrabalhoService, CrudFuncionarioService funcionarioService, RelatorioService relatorioService, RelatorioFuncionarioDinamico relatorioFuncionarioDinamico) {
 		this.cargoService = cargoService;
 		this.unidadeDeTrabalhoService = unidadeDeTrabalhoService;
 		this.funcionarioService = funcionarioService;
 		this.relatorioService = relatorioService;
+		this.relatorioFuncionarioDinamico = relatorioFuncionarioDinamico;
 	}
 
 	public static void main(String[] args) {
@@ -49,6 +49,7 @@ public class SpringDataApplication implements CommandLineRunner {
 			System.out.println("2 - Unidade de trabalho");
 			System.out.println("3 - Funcionário");
 			System.out.println("4 - Relatório");
+			System.out.println("5 - Relatório dinâmico");
 
 			int action = scanner.nextInt();
 
@@ -60,6 +61,7 @@ public class SpringDataApplication implements CommandLineRunner {
 				case 2 -> opcaoInterface = unidadeDeTrabalhoService;
 				case 3 -> opcaoInterface = funcionarioService;
 				case 4 -> opcaoInterface = relatorioService;
+				case 5 -> opcaoInterface = relatorioFuncionarioDinamico;
 				default -> system = false;
 			}
 
