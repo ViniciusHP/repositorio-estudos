@@ -1,28 +1,29 @@
 package br.com.alura.mvc.mudi.controller;
 
 import br.com.alura.mvc.mudi.model.Pedido;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @GetMapping("home")
     public String home(Model model) {
-        Pedido pedido = Pedido
-                .builder()
-                .nomeProduto("Xiaome Redmi Note 8")
-                .urlImagem("https://m.media-amazon.com/images/I/51RIqTiRc8L._AC_SX569_.jpg")
-                .urlProduto("https://www.amazon.com.br/Smartphone-Xiaomi-Redmi-Note-Camera/dp/B07Z5BBG56")
-                .valorNegociado(new BigDecimal("1299.89"))
-                .descricao("Descrição qualquer para esse pedido")
-                .build();
 
-        model.addAttribute("pedidos", Arrays.asList(pedido));
+        Query query = entityManager.createQuery("SELECT p FROM Pedido p", Pedido.class);
+        List<Pedido> pedidos = query.getResultList();
+        model.addAttribute("pedidos", pedidos);
 
         return "home";
     }
