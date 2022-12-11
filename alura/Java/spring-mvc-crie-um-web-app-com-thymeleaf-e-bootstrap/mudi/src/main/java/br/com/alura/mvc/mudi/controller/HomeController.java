@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -28,4 +29,13 @@ public class HomeController {
 
         return "home";
     }
+
+//    @GetMapping("home")
+//    public ModelAndView home() {
+//
+//        List<Pedido> pedidos = pedidoRepository.findAll();
+//        ModelAndView mv = new ModelAndView("home");
+//        mv.addObject("pedidos", pedidos);
+//        return mv;
+//    }
 }
