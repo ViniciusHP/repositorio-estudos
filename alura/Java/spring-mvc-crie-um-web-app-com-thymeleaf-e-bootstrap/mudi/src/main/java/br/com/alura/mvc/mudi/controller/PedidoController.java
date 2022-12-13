@@ -21,7 +21,7 @@ public class PedidoController {
     private PedidoRepository pedidoRepository;
 
     @GetMapping("formulario")
-    public ModelAndView formulario(RequisicaoNovoPedido requisicao) {
+    public ModelAndView formulario(RequisicaoNovoPedido requisicao, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView("pedido/formulario");
         modelAndView.addObject("requisicao", requisicao);
         return modelAndView;
