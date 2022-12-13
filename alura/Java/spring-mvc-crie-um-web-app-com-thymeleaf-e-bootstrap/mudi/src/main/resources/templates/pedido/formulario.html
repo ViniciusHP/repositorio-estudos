@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html
+  lang="pt-BR"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -21,54 +25,60 @@
         <h1 class="display-5 fw-bold">Novo pedido</h1>
       </div>
 
-      <form action="/pedido/novo" method="POST">
-        <div class="mb-3">
-          <label class="form-label" for="nomeProduto">Produto</label>
-          <input
-            type="text"
-            class="form-control"
-            name="nomeProduto"
-            placeholder="Nome do produto"
-          />
-          <small>Informe qual o nome do produto.</small>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="urlProduto">URL</label>
-          <input
-            type="text"
-            class="form-control"
-            name="urlProduto"
-            placeholder="URL do produto"
-          />
-          <small
-            >Procure em um site o produto que você deseja e cole a url da página
-            aqui.</small
-          >
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="urlImagem">Imagem</label>
-          <input
-            type="text"
-            class="form-control"
-            name="urlImagem"
-            placeholder="URL da imagem"
-          />
-          <small
-            >Copie a url de uma imagem do produto e cole aqui para ajudar a
-            conseguir compradores.</small
-          >
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="descricao">Descrição</label>
-          <textarea
-            type="text"
-            class="form-control"
-            name="descricao"
-            placeholder="Adicione detalhes importantes para ajudar o comprador."
-          ></textarea>
-        </div>
-        <button type="submit">Cadastrar</button>
-      </form>
+      <div class="card mt-3">
+        <form
+          th:object="${requisicao}"
+          action="/pedido/novo"
+          method="POST"
+          class="form-group card-body"
+        >
+          <div class="mb-3">
+            <label class="form-label" for="nomeProduto">Produto</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{nomeProduto}"
+              placeholder="Nome do produto"
+            />
+            <small>Informe qual o nome do produto.</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="urlProduto">URL</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{urlProduto}"
+              placeholder="URL do produto"
+            />
+            <small
+              >Procure em um site o produto que você deseja e cole a url da
+              página aqui.</small
+            >
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="urlImagem">Imagem</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{urlImagem}"
+              placeholder="URL da imagem"
+            />
+            <small
+              >Copie a url de uma imagem do produto e cole aqui para ajudar a
+              conseguir compradores.</small
+            >
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="descricao">Descrição</label>
+            <textarea
+              type="text"
+              class="form-control"
+              placeholder="Adicione detalhes importantes para ajudar o comprador."
+            ></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
