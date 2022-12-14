@@ -38,6 +38,8 @@ public class PedidoController {
 
         Pedido pedido = requisicao.toPedido();
         pedidoRepository.save(pedido);
+
+        modelAndView = new ModelAndView("redirect:/home");
         return modelAndView;
     }
 }

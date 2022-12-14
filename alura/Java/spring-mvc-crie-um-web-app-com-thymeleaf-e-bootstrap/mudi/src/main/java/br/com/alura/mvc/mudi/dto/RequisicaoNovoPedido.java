@@ -1,6 +1,7 @@
 package br.com.alura.mvc.mudi.dto;
 
 import br.com.alura.mvc.mudi.model.Pedido;
+import br.com.alura.mvc.mudi.model.StatusPedido;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class RequisicaoNovoPedido {
                 .urlProduto(urlProduto)
                 .urlImagem(urlImagem)
                 .descricao(descricao)
+                .status(StatusPedido.AGUARDANDO)
                 .build();
     }
 }
