@@ -21,8 +21,6 @@ public class WebSecurityConfig  {
                 .authorizeHttpRequests((requests) -> requests
                         .anyRequest().authenticated()
                 )
-                .httpBasic()
-                .and()
                 .formLogin(form -> form.loginPage("/login").permitAll())
                 .logout(LogoutConfigurer::permitAll)
                 .build();
