@@ -3,8 +3,10 @@ package br.com.alura.mvc.mudi.controller;
 import br.com.alura.mvc.mudi.dto.RequisicaoNovoPedido;
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
+import br.com.alura.mvc.mudi.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,9 @@ public class PedidoController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("formulario")
     public ModelAndView formulario(RequisicaoNovoPedido requisicao, BindingResult result) {
@@ -36,7 +41,11 @@ public class PedidoController {
             return modelAndView;
         }
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
         Pedido pedido = requisicao.toPedido();
+        userRepository.findByUsername(username)
+                .ifPresent(pedido::setUser);
         pedidoRepository.save(pedido);
 
         modelAndView = new ModelAndView("redirect:/home");

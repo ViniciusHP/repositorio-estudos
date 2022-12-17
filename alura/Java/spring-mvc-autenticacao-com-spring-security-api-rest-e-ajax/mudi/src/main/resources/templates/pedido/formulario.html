@@ -13,7 +13,7 @@
       <div class="card mt-3">
         <form
           th:object="${requisicao}"
-          action="/pedido/novo"
+          th:action="@{/pedido/novo}"
           method="POST"
           class="form-group card-body"
         >
