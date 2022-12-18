@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head th:replace="~{base :: head}"></head>
+  <body onload="onLoad()">
+    <div th:replace="~{base :: logo}"></div>
+    <div class="container" id="ofertas">
+      <div th:replace="~{base :: titulo('Faça sua Oferta')}"></div>
+      <div class="card mb-3" v-for="pedido in pedidos">
+        <div class="card-header alert alert-dark">{{pedido.nomeProduto}}</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-8 mb-3">
+              <div class="row">
+                <div class="col-md-5">
+                  Valor:
+                  <input type="text" />
+                </div>
+                <div class="col-md-7">
+                  Data de entrega:
+                  <input type="text" />
+                </div>
+              </div>
+              <div>Produto</div>
+              <div>
+                <a v-bind:href="pedido.urlProduto" target="_blank"
+                  >{{pedido.nomeProduto}}</a
+                >
+              </div>
+
+              <div>Descrição</div>
+              <div>
+                <textarea class="form-control">{{pedido.descricao}}</textarea>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-4">
+              <img class="img-thumbnail" v-bind:src="pedido.urlImagem" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      function onLoad() {
+        const { createApp } = Vue;
+
+        createApp({
+          data() {
+            return {
+              pedidos: [
+                {
+                  id: 1,
+                  nomeProduto: "Xiaome Redmi Note 8",
+                  valorNegociado: 1299.89,
+                  dataDeEntrega: null,
+                  urlProduto:
+                    "https://www.amazon.com.br/Smartphone-Xiaomi-Redmi-Note-Camera/dp/B07Z5BBG56",
+                  urlImagem:
+                    "https://m.media-amazon.com/images/I/51RIqTiRc8L._AC_SX569_.jpg",
+                  descricao: "Descrição qualquer para esse pedido",
+                  status: "AGUARDANDO",
+                },
+              ],
+            };
+          },
+        }).mount("#ofertas");
+      }
+    </script>
+  </body>
+</html>
