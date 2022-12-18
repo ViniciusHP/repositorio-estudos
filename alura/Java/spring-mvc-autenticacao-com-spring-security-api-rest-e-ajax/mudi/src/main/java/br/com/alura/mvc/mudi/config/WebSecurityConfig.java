@@ -24,13 +24,19 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().authenticated()
+                        .requestMatchers("/home/**")
+                            .permitAll()
+                        .anyRequest()
+                            .authenticated()
                 )
                 .formLogin(form ->
                         form.loginPage("/login")
                             .defaultSuccessUrl("/usuario/pedido", true)
                             .permitAll())
-                .logout(logout -> logout.logoutUrl("/logout").permitAll())
+                .logout(logout ->
+                        logout.logoutUrl("/logout")
+                                .logoutSuccessUrl("/home")
+                                .permitAll())
                 .csrf().disable()
                 .build();
     }

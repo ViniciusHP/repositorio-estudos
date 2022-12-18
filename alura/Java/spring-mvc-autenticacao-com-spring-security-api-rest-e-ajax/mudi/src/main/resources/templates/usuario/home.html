@@ -5,36 +5,48 @@
     <div th:replace="~{base :: logo}"></div>
     <div class="container">
       <div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
-      <nav class="navbar bg-light justify-content-between mb-3">
-        <div class="navbar-nav">
-          <a
-            th:classappend="${status} == null ? 'active'"
-            class="nav-link"
-            th:href="@{/usuario/pedido}"
-            >Todos</a
-          >
-          <a
-            th:classappend="${status} == 'aguardando' ? 'active'"
-            class="nav-link"
-            th:href="@{/usuario/pedido/aguardando}"
-            >Aguardando</a
-          >
-          <a
-            th:classappend="${status} == 'aprovado' ? 'active'"
-            class="nav-link"
-            th:href="@{/usuario/pedido/aprovado}"
-            >Aprovado</a
-          >
-          <a
-            th:classappend="${status} == 'entregue' ? 'active'"
-            class="nav-link"
-            th:href="@{/usuario/pedido/entregue}"
-            >Entregue</a
+      <nav
+        class="navbar navbar-expand-sm bg-light justify-content-between mb-3"
+      >
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                th:classappend="${status} == null ? 'active'"
+                class="nav-link"
+                th:href="@{/usuario/pedido}"
+                >Todos</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                th:classappend="${status} == 'aguardando' ? 'active'"
+                class="nav-link"
+                th:href="@{/usuario/pedido/aguardando}"
+                >Aguardando</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                th:classappend="${status} == 'aprovado' ? 'active'"
+                class="nav-link"
+                th:href="@{/usuario/pedido/aprovado}"
+                >Aprovado</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                th:classappend="${status} == 'entregue' ? 'active'"
+                class="nav-link"
+                th:href="@{/usuario/pedido/entregue}"
+                >Entregue</a
+              >
+            </li>
+          </ul>
+          <a class="btn btn-outline-secondary" th:href="@{/pedido/formulario}"
+            >Novo</a
           >
         </div>
-        <a class="btn btn-outline-secondary" th:href="@{/pedido/formulario}"
-          >Novo</a
-        >
       </nav>
       <div class="card mb-3" th:each="pedido : ${pedidos}">
         <th:block th:switch="${pedido.status.name()}">
