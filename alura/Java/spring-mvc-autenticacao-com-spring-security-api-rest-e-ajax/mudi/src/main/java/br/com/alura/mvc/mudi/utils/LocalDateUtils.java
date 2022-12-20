@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 public class LocalDateUtils {
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static LocalDate toLocalDate(String data) {
         try {
