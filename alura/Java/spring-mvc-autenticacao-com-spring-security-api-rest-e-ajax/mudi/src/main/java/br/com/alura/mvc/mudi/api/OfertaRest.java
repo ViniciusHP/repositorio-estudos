@@ -4,6 +4,7 @@ import br.com.alura.mvc.mudi.dto.RequisicaoNovaOferta;
 import br.com.alura.mvc.mudi.model.Oferta;
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class OfertaRest {
     private PedidoRepository pedidoRepository;
 
     @PostMapping
-    public ResponseEntity<Oferta> criaOferta(@RequestBody RequisicaoNovaOferta novaOferta) {
+    public ResponseEntity<Oferta> criaOferta(@Valid @RequestBody RequisicaoNovaOferta novaOferta) {
         Optional<Pedido> pedidoBuscado = pedidoRepository.findById(novaOferta.getPedidoId());
 
         if(pedidoBuscado.isEmpty()) {
