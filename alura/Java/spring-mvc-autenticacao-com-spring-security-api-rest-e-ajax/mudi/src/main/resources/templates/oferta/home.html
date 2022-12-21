@@ -30,7 +30,11 @@
                     class="form-control"
                     type="text"
                     v-model="pedido.valorNegociado"
+                    v-bind:class="{'is-invalid': pedido.erros.valor !== ''}"
                   />
+                  <div v-if="pedido.erros.valor" class="invalid-feedback">
+                    {{pedido.erros.valor}}
+                  </div>
                 </div>
                 <div class="col-md-7">
                   Data de entrega:
@@ -38,7 +42,14 @@
                     class="form-control"
                     type="text"
                     v-model="pedido.dataDeEntrega"
+                    v-bind:class="{'is-invalid': pedido.erros.dataDeEntrega !== ''}"
                   />
+                  <div
+                    v-if="pedido.erros.dataDeEntrega"
+                    class="invalid-feedback"
+                  >
+                    {{pedido.erros.dataDeEntrega}}
+                  </div>
                 </div>
               </div>
               <div class="mt-2">
@@ -83,12 +94,23 @@
             axios
               .get("http://localhost:8080/api/pedidos/aguardando")
               .then((r) => {
-                r.data.forEach((p) => (p.ofertaEnviada = false));
+                r.data.forEach((p) => {
+                  p.ofertaEnviada = false;
+                  p.erros = {
+                    valor: "",
+                    dataDeEntrega: "",
+                  };
+                });
                 this.pedidos = r.data;
               });
           },
           methods: {
             enviarOferta: function (pedido) {
+              pedido.erros = {
+                valor: "",
+                dataDeEntrega: "",
+              };
+
               axios
                 .post("http://localhost:8080/api/ofertas", {
                   pedidoId: pedido.id,
@@ -96,7 +118,12 @@
                   dataDeEntrega: pedido.dataDeEntrega,
                   comentario: pedido.comentario,
                 })
-                .then((r) => (pedido.ofertaEnviada = true));
+                .then((r) => (pedido.ofertaEnviada = true))
+                .catch((e) => {
+                  e.response.data.errors.forEach((error) => {
+                    pedido.erros[error.field] = error.defaultMessage;
+                  });
+                });
             },
           },
         }).mount("#ofertas");
