@@ -48,8 +48,12 @@
                   v-model="pedido.comentario"
                 ></textarea>
               </div>
+              <button class="btn btn-success mt-2" v-if="pedido.ofertaEnviada">
+                Oferta enviada
+              </button>
               <button
                 class="btn btn-primary mt-2"
+                v-else
                 v-on:click="enviarOferta(pedido)"
               >
                 Enviar Oferta
@@ -78,11 +82,21 @@
           mounted() {
             axios
               .get("http://localhost:8080/api/pedidos/aguardando")
-              .then((r) => (this.pedidos = r.data));
+              .then((r) => {
+                r.data.forEach((p) => (p.ofertaEnviada = false));
+                this.pedidos = r.data;
+              });
           },
           methods: {
             enviarOferta: function (pedido) {
-              console.log(pedido);
+              axios
+                .post("http://localhost:8080/api/ofertas", {
+                  pedidoId: pedido.id,
+                  valor: pedido.valorNegociado,
+                  dataDeEntrega: pedido.dataDeEntrega,
+                  comentario: pedido.comentario,
+                })
+                .then((r) => (pedido.ofertaEnviada = true));
             },
           },
         }).mount("#ofertas");

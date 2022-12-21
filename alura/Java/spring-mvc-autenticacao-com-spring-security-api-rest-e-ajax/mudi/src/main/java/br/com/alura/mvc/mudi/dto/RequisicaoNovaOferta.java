@@ -15,13 +15,13 @@ import java.time.LocalDate;
 public class RequisicaoNovaOferta {
     private Long pedidoId;
     private String valor;
-    private String dataDaEntrega;
+    private String dataDeEntrega;
     private String comentario;
 
     public Oferta toOferta() {
         Oferta oferta = new Oferta();
         oferta.setComentario(this.comentario);
-        oferta.setDataDaEntrega(LocalDateUtils.toLocalDate(this.dataDaEntrega));
+        oferta.setDataDaEntrega(LocalDateUtils.toLocalDate(this.dataDeEntrega));
         oferta.setValor(new BigDecimal(this.valor));
         return oferta;
     }
