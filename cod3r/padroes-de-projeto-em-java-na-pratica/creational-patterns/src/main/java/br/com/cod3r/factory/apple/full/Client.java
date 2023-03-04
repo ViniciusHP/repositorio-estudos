@@ -3,7 +3,7 @@ package br.com.cod3r.factory.apple.full;
 import br.com.cod3r.factory.apple.full.factory.IPhone11ProFactory;
 import br.com.cod3r.factory.apple.full.factory.IPhoneFactory;
 import br.com.cod3r.factory.apple.full.factory.IPhoneXFactory;
-import br.com.cod3r.factory.apple.full.model.IPhone;
+import br.com.cod3r.factory.apple.model.IPhone;
 
 public class Client {
 	

@@ -1,4 +1,4 @@
-package br.com.cod3r.factory.apple.full.model;
+package br.com.cod3r.factory.apple.model;
 
 public class IPhone11 extends IPhone {
 

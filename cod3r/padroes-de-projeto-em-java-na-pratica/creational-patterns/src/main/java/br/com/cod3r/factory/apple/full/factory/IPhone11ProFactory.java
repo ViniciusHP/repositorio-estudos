@@ -1,7 +1,7 @@
 package br.com.cod3r.factory.apple.full.factory;
 
-import br.com.cod3r.factory.apple.full.model.IPhone;
-import br.com.cod3r.factory.apple.full.model.IPhone11Pro;
+import br.com.cod3r.factory.apple.model.IPhone;
+import br.com.cod3r.factory.apple.model.IPhone11Pro;
 
 public class IPhone11ProFactory extends IPhoneFactory{
     @Override
