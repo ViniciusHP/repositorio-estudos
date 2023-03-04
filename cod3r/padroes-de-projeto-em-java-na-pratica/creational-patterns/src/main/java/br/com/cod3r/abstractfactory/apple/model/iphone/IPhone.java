@@ -16,10 +16,10 @@ public abstract class IPhone {
 	}
 
 	public void certificates() {
-		System.out.println("Testing all the certificates");
+		System.out.println(this.rules.getCertificates().applyCertification());
 	}
 
 	public void pack() {
-		System.out.println("Packing the device");
+		System.out.println(this.rules.getPacking().pack());
 	}
 }
