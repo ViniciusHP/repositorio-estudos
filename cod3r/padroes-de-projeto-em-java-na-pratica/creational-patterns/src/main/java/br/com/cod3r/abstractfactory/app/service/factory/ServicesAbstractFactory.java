@@ -1,5 +1,9 @@
 package br.com.cod3r.abstractfactory.app.service.factory;
 
-public interface ServicesAbstractFactory {
+import br.com.cod3r.abstractfactory.app.service.services.CarService;
+import br.com.cod3r.abstractfactory.app.service.services.UserService;
 
+public interface ServicesAbstractFactory {
+    CarService getCarService();
+    UserService getUserService();
 }
