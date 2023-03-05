@@ -1,4 +1,4 @@
-package br.com.cod3r.builder.meal.model;
+package br.com.cod3r.builder.meal.classic.model;
 
 public class FastFoodMeal {
 
