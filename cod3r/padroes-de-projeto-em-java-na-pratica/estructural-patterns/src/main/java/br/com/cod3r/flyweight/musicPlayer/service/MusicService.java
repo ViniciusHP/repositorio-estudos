@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.cod3r.flyweight.musicPlayer.model.Music;
+import br.com.cod3r.flyweight.musicPlayer.musicFlyweight.FlyweightFactory;
 
 public class MusicService {
 	private Map<String, Map<String, Music>> memory;
@@ -20,20 +21,15 @@ public class MusicService {
 			userPlayList = new HashMap<>();
 			memory.put(user, userPlayList);
 		}
-		
+
 		Music song = userPlayList.get(desc);
 		if(song == null) {
-			song = getMusicByString(desc);
+			song = new Music(FlyweightFactory.getInstance().getMusic(desc));
 			userPlayList.put(desc, song);
 		}
 		System.out.println(String.format("%s is listenning '%s'", 
-				user, song.getName()));
+				user, song.getMusicFlyweight().getName()));
 		song.listenning();
-	}
-	
-	private Music getMusicByString(String desc) {
-		String[] musicData = desc.split(";");
-		return new Music(musicData[0], musicData[1], new Integer(musicData[2]));
 	}
 	
 	public void report() {
@@ -46,12 +42,15 @@ public class MusicService {
 			Collection<Music> musics = memory.get(user).values();
 			for(Music music: musics) {
 				System.out.println(String.format("%s/%s %d times", 
-						music.getArtist(), music.getName(), music.getPlayerQty()));
-				timeCounter += (music.getPlayerQty() * music.getDurationInSeconds());
+						music.getMusicFlyweight().getArtist(),
+						music.getMusicFlyweight().getName(),
+						music.getPlayerQty()));
+				timeCounter += (music.getPlayerQty() * music.getMusicFlyweight().getDurationInSeconds());
 				musicInMemory++;
 			}
 			System.out.println(String.format("%s has listen music for %d seconds", user, timeCounter));
 		}
 		System.out.println("Total of musics in memory: " + musicInMemory);
+		System.out.println("Total of musics in flyWeight's memory: " + FlyweightFactory.getInstance().getSize());
 	}
 }

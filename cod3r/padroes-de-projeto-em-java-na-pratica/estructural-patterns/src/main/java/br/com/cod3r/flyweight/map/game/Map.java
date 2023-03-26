@@ -3,7 +3,7 @@ package br.com.cod3r.flyweight.map.game;
 import java.util.Random;
 
 import br.com.cod3r.flyweight.map.model.Pixel;
-import br.com.cod3r.flyweight.map.model.PixelFactory;
+import br.com.cod3r.flyweight.map.model.PixelTypeFactory;
 
 public class Map {
 	private static final Integer TRYS = 10;
@@ -26,19 +26,19 @@ public class Map {
 				Pixel pixel = null;
 				switch (pix) {
 				case 0: 
-					pixel = new Pixel(PixelFactory.getInstance().getPixelType('$', 100), false);
+					pixel = new Pixel(PixelTypeFactory.getInstance().getPixelType('$', 100), false);
 					break;
 				case 1: 
-					pixel = new Pixel(PixelFactory.getInstance().getPixelType('%', 50), false);
+					pixel = new Pixel(PixelTypeFactory.getInstance().getPixelType('%', 50), false);
 					break;
 				case 2: 
-					pixel = new Pixel(PixelFactory.getInstance().getPixelType('X', -50), false);
+					pixel = new Pixel(PixelTypeFactory.getInstance().getPixelType('X', -50), false);
 					break;
 				case 3: 
-					pixel = new Pixel(PixelFactory.getInstance().getPixelType('@', -100), false);
+					pixel = new Pixel(PixelTypeFactory.getInstance().getPixelType('@', -100), false);
 					break;
 				default:
-					pixel = new Pixel(PixelFactory.getInstance().getPixelType(' ', 0), false);
+					pixel = new Pixel(PixelTypeFactory.getInstance().getPixelType(' ', 0), false);
 					break;
 				}
 				map[row][column] = pixel; 
