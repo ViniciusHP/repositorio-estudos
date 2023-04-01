@@ -12,11 +12,11 @@ public class Translator {
 	
 	public Translator() {
 		porToEng.put("Oi", "Hello");
-		porToEng.put("Tudo bem?", "How are you?");
+		porToEng.put("Como você está?", "How are you?");
 		porToEng.put("Estou bem, obrigado.", "I'm fine, thanks");
 		porToEng.put("Tchau", "Bye");
 		engToPor.put("Hello", "Oi");
-		engToPor.put("How are you?", "Tudo bem?");
+		engToPor.put("How are you?", "Como você está?");
 		engToPor.put("I'm fine, thanks", "Estou bem, obrigado.");
 		engToPor.put("Bye", "Tchau");
 	}

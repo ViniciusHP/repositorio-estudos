@@ -1,6 +1,8 @@
 package br.com.cod3r.mediator.translate;
 
+import br.com.cod3r.mediator.translate.mediator.ChatMediator;
 import br.com.cod3r.mediator.translate.mediator.Mediator;
+import br.com.cod3r.mediator.translate.mediator.TranslateMediator;
 import br.com.cod3r.mediator.translate.model.EnglishUser;
 import br.com.cod3r.mediator.translate.model.PortugueseUser;
 import br.com.cod3r.mediator.translate.model.User;
@@ -8,7 +10,7 @@ import br.com.cod3r.mediator.translate.model.User;
 public class Client {
 
 	public static void main(String[] args) {
-		Mediator chatRoom = null;
+		Mediator chatRoom = new TranslateMediator();
 		
 		User alan = new EnglishUser("Alan", chatRoom);
 		User jose = new PortugueseUser("Jose", chatRoom);
