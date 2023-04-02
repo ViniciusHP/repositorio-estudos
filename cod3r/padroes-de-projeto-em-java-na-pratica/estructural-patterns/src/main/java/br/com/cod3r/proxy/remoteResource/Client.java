@@ -7,11 +7,13 @@ import java.util.Date;
 
 import br.com.cod3r.proxy.remoteResource.services.Resource;
 import br.com.cod3r.proxy.remoteResource.services.ResourceImpl;
+import br.com.cod3r.proxy.remoteResource.services.ResourceProxy;
 
 public class Client {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		Resource resource = new ResourceImpl();
+		//Resource resource = new ResourceProxy("Inv@lid!");
+		Resource resource = new ResourceProxy("v@lid!");
 		BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 		boolean exit = false;
 		while(true) {
