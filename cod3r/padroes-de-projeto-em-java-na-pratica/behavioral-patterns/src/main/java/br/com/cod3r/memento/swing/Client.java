@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import br.com.cod3r.memento.swing.component.TextAreaWithMemory;
+import br.com.cod3r.memento.swing.component.TextAreaWithMemory.TextareaMemento;
+import br.com.cod3r.memento.swing.memory.Caretaker;
 
 public class Client {
 
@@ -40,7 +42,42 @@ public class Client {
 		bottomPanel.add(save);
 		
 		frame.add(bottomPanel, BorderLayout.SOUTH);
-		
+
+		Caretaker caretaker = new Caretaker();
+		int currentIndex = 0;
+
+		save.addActionListener(e -> {
+			caretaker.add(originator.save());
+			int index = caretaker.getHistoryMementos().size();
+			mementosList.addItem(String.valueOf(index));
+			mementosList.setSelectedIndex(index - 1);
+			originator.requestFocusInWindow();
+		});
+
+		next.addActionListener(e -> {
+			int selectedIndex = mementosList.getSelectedIndex();
+			if(selectedIndex < mementosList.getItemCount() - 1) {
+				int nextIndex = selectedIndex + 1;
+				originator.restore((TextareaMemento) caretaker.get(nextIndex));
+				mementosList.setSelectedIndex(nextIndex);
+				originator.requestFocusInWindow();
+			}
+		});
+
+		previous.addActionListener(e -> {
+			int selectedIndex = mementosList.getSelectedIndex();
+			if(selectedIndex > 0) {
+				int previousIndex = selectedIndex - 1;
+				originator.restore((TextareaMemento) caretaker.get(previousIndex));
+				mementosList.setSelectedIndex(previousIndex);
+				originator.requestFocusInWindow();
+			}
+		});
+
+		mementosList.addItemListener(i -> {
+			originator.restore((TextareaMemento) caretaker.get(mementosList.getSelectedIndex()));
+			originator.requestFocusInWindow();
+		});
 		
 		frame.setSize(400,200);  
 		frame.setVisible(true);
