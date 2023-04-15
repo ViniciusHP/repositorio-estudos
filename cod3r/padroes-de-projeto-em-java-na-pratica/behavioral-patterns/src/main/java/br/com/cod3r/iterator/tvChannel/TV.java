@@ -1,13 +1,14 @@
 package br.com.cod3r.iterator.tvChannel;
 
-import java.util.Random;
+import java.security.SecureRandom;
+import java.util.Iterator;
 
-public class TV {
+public class TV implements Iterable<Integer>{
 	private Integer[] channels;
 	
 	public void searchAvaiableChannels() {
 		this.channels = new Integer[30];
-		Random r = new Random();
+		SecureRandom r = new SecureRandom();
 		int channelsCount = 0;
 		for(int i = 0; i < channels.length; i++) {
 			if(r.nextInt(2) == 1) {
@@ -26,5 +27,10 @@ public class TV {
 			}
 		}
 		System.out.println("No signal!");
+	}
+
+	@Override
+	public Iterator<Integer> iterator() {
+		return new ChannelIterator(channels);
 	}
 }
