@@ -1,21 +1,19 @@
 package br.com.cod3r.observer.party.characters;
 
-public class Wife {
-	private Doorman doorman;
-	
-	public Wife(Doorman doorman) {
-		this.doorman = doorman;
+import br.com.cod3r.observer.party.subject.Doorman;
+
+public class Wife implements Observer<Boolean> {
+
+	public void partyTime() {
+		System.out.println("Let´s Party! :D");
 	}
 
-	public void startPartyIfPossible() {
-		if(doorman.getStatus()) {
+	@Override
+	public void update(Boolean isArrived) {
+		if(isArrived) {
 			partyTime();
 		} else {
 			System.out.println("Hold!");
 		}
-	}
-	
-	public void partyTime() {
-		System.out.println("Let´s Party! :D");
 	}
 }
