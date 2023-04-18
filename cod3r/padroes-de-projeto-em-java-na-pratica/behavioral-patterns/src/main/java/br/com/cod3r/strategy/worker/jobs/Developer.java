@@ -1,20 +1,16 @@
 package br.com.cod3r.strategy.worker.jobs;
 
-public class Developer implements Worker {
+import br.com.cod3r.strategy.worker.strategies.eat.EatStrategy;
+import br.com.cod3r.strategy.worker.strategies.eat.MeatFoodStrategy;
+import br.com.cod3r.strategy.worker.strategies.transportation.CarStrategy;
+import br.com.cod3r.strategy.worker.strategies.transportation.TransportationStrategy;
+import br.com.cod3r.strategy.worker.strategies.work.DeveloperStrategy;
+import br.com.cod3r.strategy.worker.strategies.work.WorkStrategy;
 
-	@Override
-	public void eat() {
-		
+public class Developer extends Person {
+
+
+	public Developer() {
+		super(new MeatFoodStrategy(), new CarStrategy(), new DeveloperStrategy());
 	}
-
-	@Override
-	public void move() {
-		
-	}
-
-	@Override
-	public void work() {
-		
-	}
-
 }

@@ -1,20 +1,15 @@
 package br.com.cod3r.strategy.worker.jobs;
 
-public class Pilot implements Worker {
+import br.com.cod3r.strategy.worker.strategies.eat.EatStrategy;
+import br.com.cod3r.strategy.worker.strategies.eat.MeatFoodStrategy;
+import br.com.cod3r.strategy.worker.strategies.transportation.AirplaneStrategy;
+import br.com.cod3r.strategy.worker.strategies.transportation.TransportationStrategy;
+import br.com.cod3r.strategy.worker.strategies.work.PilotStrategy;
+import br.com.cod3r.strategy.worker.strategies.work.WorkStrategy;
 
-	@Override
-	public void eat() {
-		
+public class Pilot extends Person {
+
+	public Pilot() {
+		super(new MeatFoodStrategy(), new AirplaneStrategy(), new PilotStrategy());
 	}
-
-	@Override
-	public void move() {
-		
-	}
-
-	@Override
-	public void work() {
-		
-	}
-
 }

@@ -1,20 +1,12 @@
 package br.com.cod3r.strategy.worker.jobs;
 
-public class HispsterDeveloper implements Worker {
+import br.com.cod3r.strategy.worker.strategies.eat.VeggieFoodStrategy;
+import br.com.cod3r.strategy.worker.strategies.transportation.BikeStrategy;
+import br.com.cod3r.strategy.worker.strategies.work.DeveloperStrategy;
 
-	@Override
-	public void eat() {
-		
+public class HispsterDeveloper extends Person {
+
+	public HispsterDeveloper() {
+		super(new VeggieFoodStrategy(), new BikeStrategy(), new DeveloperStrategy());
 	}
-
-	@Override
-	public void move() {
-		
-	}
-
-	@Override
-	public void work() {
-		
-	}
-
 }

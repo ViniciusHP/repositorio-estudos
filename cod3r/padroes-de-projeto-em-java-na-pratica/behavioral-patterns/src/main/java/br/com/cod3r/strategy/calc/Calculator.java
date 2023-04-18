@@ -1,5 +1,7 @@
 package br.com.cod3r.strategy.calc;
 
+import br.com.cod3r.strategy.calc.strategy.OperationStrategy;
+
 public class Calculator {
 	private int num1;
 	private int num2;
@@ -9,13 +11,7 @@ public class Calculator {
 		this.num2 = num2;
 	}
 	
-	public int getResult(String operation) {
-		switch (operation) {
-		case "+": return num1 + num2;
-		case "-": return num1 - num2;
-		case "*": return num1 * num2;
-		case "/": return num1 / num2;
-		default: return 0;
-		}
+	public int getResult(OperationStrategy operation) {
+		return operation.calculate(num1, num2);
 	}
 }
