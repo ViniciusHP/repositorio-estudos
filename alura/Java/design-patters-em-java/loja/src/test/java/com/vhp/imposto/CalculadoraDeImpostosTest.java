@@ -18,13 +18,13 @@ public class CalculadoraDeImpostosTest {
 
     @Test
     public void shouldIcmsReturn10Percent() {
-        Orcamento orcamento = new Orcamento(new BigDecimal("100"));
+        Orcamento orcamento = new Orcamento(new BigDecimal("100"), 1);
         Assert.assertEquals(new BigDecimal("10.0"), calculadoraDeImpostos.calcular(orcamento, new ICMS()));
     }
 
     @Test
     public void shouldIssReturn6Percent() {
-        Orcamento orcamento = new Orcamento(new BigDecimal("100"));
+        Orcamento orcamento = new Orcamento(new BigDecimal("100"), 1);
         Assert.assertEquals(new BigDecimal("6.00"), calculadoraDeImpostos.calcular(orcamento, new ISS()));
     }
 }
