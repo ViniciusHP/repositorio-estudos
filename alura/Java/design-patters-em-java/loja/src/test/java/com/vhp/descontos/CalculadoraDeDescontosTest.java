@@ -24,9 +24,9 @@ public class CalculadoraDeDescontosTest {
     }
 
     @Test
-    public void shouldReturn10PercentOfTheValueWhenCalledWithValueMoreThan500() {
+    public void shouldReturn5PercentOfTheValueWhenCalledWithValueMoreThan500() {
         Orcamento orcamento = new Orcamento(new BigDecimal("1000"), 1);
-        assertEquals(new BigDecimal("100.0"), calculadoraDeDescontos.calcular(orcamento));
+        assertEquals(new BigDecimal("50.00"), calculadoraDeDescontos.calcular(orcamento));
     }
 
     @Test
