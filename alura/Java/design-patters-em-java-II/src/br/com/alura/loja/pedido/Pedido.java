@@ -28,4 +28,12 @@ public class Pedido {
 		return orcamento;
 	}
 
+	@Override
+	public String toString() {
+		return "Pedido{" +
+				"cliente='" + cliente + '\'' +
+				", data=" + data +
+				", orcamento=" + orcamento +
+				'}';
+	}
 }
