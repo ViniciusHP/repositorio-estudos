@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginTest {
 
-    private static final String LOGIN = "http://localhost:8080/login";
+    private static final String URL_LOGIN = "http://localhost:8080/login";
     private WebDriver browser;
 
     @BeforeAll
@@ -28,7 +28,7 @@ public class LoginTest {
 
     @Test
     public void deveriaEfetuarLoginComDadosValidos() {
-        browser.navigate().to(LOGIN);
+        browser.navigate().to(URL_LOGIN);
         browser.findElement(By.id("username"))
                 .sendKeys("fulano");
 
@@ -38,13 +38,13 @@ public class LoginTest {
         browser.findElement(By.id("login-form"))
                 .submit();
 
-        Assertions.assertNotEquals(LOGIN, browser.getCurrentUrl());
+        Assertions.assertNotEquals(URL_LOGIN, browser.getCurrentUrl());
         Assertions.assertEquals("fulano", browser.findElement(By.id("usuario-logado")).getText());
     }
 
     @Test
     public void naoDeveriaLogarComDadosInvalidos() {
-        browser.navigate().to(LOGIN);
+        browser.navigate().to(URL_LOGIN);
         browser.findElement(By.id("username"))
                 .sendKeys("invalido");
 
@@ -54,9 +54,17 @@ public class LoginTest {
         browser.findElement(By.id("login-form"))
                 .submit();
 
-        Assertions.assertEquals(LOGIN + "?error", browser.getCurrentUrl());
+        Assertions.assertEquals(URL_LOGIN + "?error", browser.getCurrentUrl());
         Assertions.assertTrue(browser.getPageSource().contains("Usuário e senha inválidos."));
         Assertions.assertThrows(NoSuchElementException.class,
                 () -> browser.findElement(By.id("usuario-logado")).getText());
+    }
+
+    @Test
+    public void naoDeveriaAcessarPaginaRestritaSemEstarLogado() {
+        browser.navigate().to("http://localhost:8080/leiloes/2");
+
+        Assertions.assertEquals(URL_LOGIN, browser.getCurrentUrl());
+        Assertions.assertFalse(browser.getPageSource().contains("Dados do Leilão"));
     }
 }
