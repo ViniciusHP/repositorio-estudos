@@ -1,70 +1,48 @@
 package br.com.alura.leilao.login;
 
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LoginTest {
 
-    private static final String URL_LOGIN = "http://localhost:8080/login";
-    private WebDriver browser;
-
-    @BeforeAll
-    public static void beforeAll() {
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-    }
+    private LoginPage paginaLogin;
 
     @BeforeEach
     public void beforeEach() {
-        browser = new ChromeDriver();
+        this.paginaLogin = new LoginPage();
     }
 
     @AfterEach
     public void afterEach() {
-        browser.quit();
+        this.paginaLogin.fechar();
     }
 
     @Test
     public void deveriaEfetuarLoginComDadosValidos() {
-        browser.navigate().to(URL_LOGIN);
-        browser.findElement(By.id("username"))
-                .sendKeys("fulano");
+        paginaLogin.preencheFormularioDeLogin("fulano", "pass");
+        paginaLogin.efetuaLogin();
 
-        browser.findElement(By.id("password"))
-                .sendKeys("pass");
-
-        browser.findElement(By.id("login-form"))
-                .submit();
-
-        Assertions.assertNotEquals(URL_LOGIN, browser.getCurrentUrl());
-        Assertions.assertEquals("fulano", browser.findElement(By.id("usuario-logado")).getText());
+        Assertions.assertFalse(paginaLogin.isPaginaDeLogin());
+        Assertions.assertEquals("fulano", paginaLogin.getNomeUsuarioLogado());
     }
 
     @Test
     public void naoDeveriaLogarComDadosInvalidos() {
-        browser.navigate().to(URL_LOGIN);
-        browser.findElement(By.id("username"))
-                .sendKeys("invalido");
+        paginaLogin.preencheFormularioDeLogin("invalido", "123123");
+        paginaLogin.efetuaLogin();
 
-        browser.findElement(By.id("password"))
-                .sendKeys("123123");
-
-        browser.findElement(By.id("login-form"))
-                .submit();
-
-        Assertions.assertEquals(URL_LOGIN + "?error", browser.getCurrentUrl());
-        Assertions.assertTrue(browser.getPageSource().contains("Usuário e senha inválidos."));
-        Assertions.assertThrows(NoSuchElementException.class,
-                () -> browser.findElement(By.id("usuario-logado")).getText());
+        Assertions.assertTrue(paginaLogin.isPaginaDeLoginComDadosInvalidos());
+        Assertions.assertTrue(paginaLogin.contemTexto("Usuário e senha inválidos."));
+        Assertions.assertNull(paginaLogin.getNomeUsuarioLogado());
     }
 
     @Test
     public void naoDeveriaAcessarPaginaRestritaSemEstarLogado() {
-        browser.navigate().to("http://localhost:8080/leiloes/2");
+        paginaLogin.navegaParaPaginaDeLances();
 
-        Assertions.assertEquals(URL_LOGIN, browser.getCurrentUrl());
-        Assertions.assertFalse(browser.getPageSource().contains("Dados do Leilão"));
+        Assertions.assertTrue(paginaLogin.isPaginaDeLogin());
+        Assertions.assertFalse(paginaLogin.contemTexto("Dados do Leilão"));
     }
 }
