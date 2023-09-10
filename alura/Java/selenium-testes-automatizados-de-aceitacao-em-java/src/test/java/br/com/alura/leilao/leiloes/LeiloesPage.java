@@ -34,4 +34,8 @@ public class LeiloesPage {
                 && colunaValorInicial.getText().equals(valorInicial)
                 && colunaDataAbertura.getText().equals(dataAbertura);
     }
+
+    public boolean isPaginaAtual() {
+        return URL_LEILOES.equals(browser.getCurrentUrl());
+    }
 }

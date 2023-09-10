@@ -3,8 +3,12 @@ package br.com.alura.leilao.leiloes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CadastroLeilaoPage {
 
+    private static final String URL_CADASTRO_LEILAO = "http://localhost:8080/leiloes/new";
     private WebDriver browser;
 
     public CadastroLeilaoPage(WebDriver browser) {
@@ -29,5 +33,20 @@ public class CadastroLeilaoPage {
                 .click();
 
         return new LeiloesPage(browser);
+    }
+
+    public boolean isPaginaAtual() {
+        return URL_CADASTRO_LEILAO.equals(browser.getCurrentUrl());
+    }
+
+    public boolean isMensagensDeValidacoesVisiveis() {
+        final String pageSource = browser.getPageSource();
+        List<String> mensagensValidacao = Arrays.asList("minimo 3 caracteres",
+                "não deve estar em branco",
+                "deve ser um valor maior de 0.1",
+                "deve ser uma data no formato dd/MM/yyyy");
+
+        return mensagensValidacao.stream()
+                .allMatch(pageSource::contains);
     }
 }
