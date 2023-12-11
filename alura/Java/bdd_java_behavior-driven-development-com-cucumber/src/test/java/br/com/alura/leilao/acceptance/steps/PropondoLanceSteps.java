@@ -1,12 +1,15 @@
 package br.com.alura.leilao.acceptance.steps;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 
 import br.com.alura.leilao.model.Lance;
 import br.com.alura.leilao.model.Leilao;
 import br.com.alura.leilao.model.Usuario;
+import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
@@ -16,9 +19,14 @@ public class PropondoLanceSteps {
 	private Lance lance;
 	private Leilao leilao;
 	
-	private Lance lance10;
-	private Lance lance15;
-
+	private List<Lance> lista;
+	
+	@Before
+	public void setup() {
+		lista = new ArrayList<>();
+		leilao = new Leilao("Tablet XPTO");
+	}
+	
 	@Dado("um lance valido")
 	public void dado_um_lance_valido() {
 		Usuario usuario = new Usuario("Fulano");
@@ -38,27 +46,32 @@ public class PropondoLanceSteps {
 	}
 	
 
-	@Dado("vários lances válidos")
-	public void vários_lances_válidos() {
-		Usuario usuario1 = new Usuario("Fulano");
-		lance10 = new Lance(usuario1, BigDecimal.TEN);
-		
-		Usuario usuario2 = new Usuario("Beltrano");
-		lance15 = new Lance(usuario2, new BigDecimal("15.0"));
-		leilao = new Leilao("Tablet XPTO");
+//	@Dado("vários lances válidos")
+//	public void vários_lances_válidos() {
+//		Usuario usuario1 = new Usuario("Fulano");
+//		lance10 = new Lance(usuario1, BigDecimal.TEN);
+//		
+//		Usuario usuario2 = new Usuario("Beltrano");
+//		lance15 = new Lance(usuario2, new BigDecimal("15.0"));
+//		leilao = new Leilao("Tablet XPTO");
+//	}
+
+	@Dado("um lance de {double} reais do usuário {string}")
+	public void um_lance_de_reais_do_usuário_fulano(Double valor, String nomeUsuario) {
+		Lance lance = new Lance(new Usuario(nomeUsuario), new BigDecimal(valor));
+		lista.add(lance);
 	}
 
 	@Quando("propõe vários lances ao leilão")
 	public void propõe_vários_lances_ao_leilão() {
-		leilao.propoe(lance10);
-		leilao.propoe(lance15);
+		lista.forEach(leilao::propoe);
 	}
 	
 	@Entao("os lances são aceitos")
 	public void os_lances_são_aceitos() {
-		Assert.assertEquals(2, leilao.getLances().size());
-		Assert.assertEquals(BigDecimal.TEN, leilao.getLances().get(0).getValor());
-		Assert.assertEquals(new BigDecimal("15.0"), leilao.getLances().get(1).getValor());
+		Assert.assertEquals(lista.size(), leilao.getLances().size());
+		Assert.assertEquals(lista.get(0).getValor(), leilao.getLances().get(0).getValor());
+		Assert.assertEquals(lista.get(1).getValor(), leilao.getLances().get(1).getValor());
 	}
 
 }
