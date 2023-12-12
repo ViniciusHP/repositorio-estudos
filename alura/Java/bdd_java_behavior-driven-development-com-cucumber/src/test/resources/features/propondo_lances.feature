@@ -11,3 +11,13 @@ Cenário: Propondo vários lances válidos
  E um lance de 15.0 reais do usuário "beltrano"
  Quando propõe vários lances ao leilão
  Então os lances são aceitos
+ 
+Esquema do Cenário: Propondo um lance inválido
+ Dado um lance de <valor> reais do usuário com nome <nomeUsuario>
+ Quando propõe ao leilão
+ Então o lance não é aceito
+
+Exemplos:
+	| valor |	nomeUsuario |
+	|	0			| "beltrano"	|
+	| -1		|	"fulano"		|
