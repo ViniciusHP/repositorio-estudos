@@ -26,6 +26,10 @@ public class LeiloesPage {
 				driver.getPageSource().contains(valor);
 	}
 
+	public boolean estaNaPaginaDeLeiloes() {
+		return this.driver.getCurrentUrl().endsWith("/leiloes");
+	}
+
 	public NovoLeilaoPage visitaPaginaParaCriarUmNovoLeilao() {
 		
 		WebDriverWait wait = new WebDriverWait(driver,5);
