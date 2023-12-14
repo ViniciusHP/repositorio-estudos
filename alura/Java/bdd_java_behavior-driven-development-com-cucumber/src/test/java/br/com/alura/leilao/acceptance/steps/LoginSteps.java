@@ -30,24 +30,25 @@ public class LoginSteps {
 	@Entao("é redirecionado para a página de leilões")
 	public void é_redirecionado_para_a_página_de_leilões() {
 		Assert.assertTrue(leiloesPage.estaNaPaginaDeLeiloes());
+		browser.clean();
 	}
 	
 
 	@Dado("o usuário inválido")
 	public void o_usuário_inválido() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		browser = new Browser();
+	    browser.seed();
+	    loginPage = browser.getLoginPage();
 	}
 
 	@Quando("tenta se logar")
 	public void tenta_se_logar() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		leiloesPage = loginPage.realizaLoginComo("fulano", "xpto");
 	}
 	
 	@Entao("continua na página de login")
 	public void continua_na_página_de_login() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Assert.assertTrue(loginPage.estaNaPaginaDeLoginComErro());
+		browser.clean();
 	}
 }

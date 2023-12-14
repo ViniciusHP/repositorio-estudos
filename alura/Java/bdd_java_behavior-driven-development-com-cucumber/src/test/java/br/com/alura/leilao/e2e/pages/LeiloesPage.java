@@ -27,6 +27,7 @@ public class LeiloesPage {
 	}
 
 	public boolean estaNaPaginaDeLeiloes() {
+		this.esperaCarregarPaginaDeLeiloes();
 		return this.driver.getCurrentUrl().endsWith("/leiloes");
 	}
 
@@ -80,4 +81,10 @@ public class LeiloesPage {
 				By.xpath("//table[@class='table table-hover']/tbody/tr/td[contains(text(),'" +donoDoLeilao+ "')]/following-sibling::td/a"));
 		return href.getText().contains("editar");
 	}
+	
+	public void esperaCarregarPaginaDeLeiloes() {
+		WebDriverWait wait = new WebDriverWait(driver, 2);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Todos leilões')]")));
+	}
+
 }
