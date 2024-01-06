@@ -6,6 +6,6 @@ import br.com.alura.escola.dominio.aluno.Aluno;
 public class EnviarEmailIndicacaoJavaMail implements EnviarEmailIndicacao {
     @Override
     public void enviarPara(Aluno indicado) {
-        // lógica de envio de amil com a lib Java Mail
+        // lógica de envio de email com a lib Java Mail
     }
 }
