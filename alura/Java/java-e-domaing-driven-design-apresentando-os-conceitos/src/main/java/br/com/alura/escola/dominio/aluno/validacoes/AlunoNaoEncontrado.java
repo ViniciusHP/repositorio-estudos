@@ -1,4 +1,6 @@
-package br.com.alura.escola.dominio.aluno;
+package br.com.alura.escola.dominio.aluno.validacoes;
+
+import br.com.alura.escola.dominio.aluno.CPF;
 
 public class AlunoNaoEncontrado extends RuntimeException {
 

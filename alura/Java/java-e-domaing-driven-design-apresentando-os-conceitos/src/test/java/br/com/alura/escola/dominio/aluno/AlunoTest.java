@@ -1,5 +1,6 @@
 package br.com.alura.escola.dominio.aluno;
 
+import br.com.alura.escola.dominio.aluno.validacoes.LimiteDeTelefonesAtingido;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
