@@ -14,6 +14,5 @@ public class MatricularAluno {
     public void executa(MatricularAlunoDto dados) {
         Aluno aluno = dados.getAluno();
         repositorio.matricular(aluno);
-        System.out.println("Matriculado");
     }
 }
