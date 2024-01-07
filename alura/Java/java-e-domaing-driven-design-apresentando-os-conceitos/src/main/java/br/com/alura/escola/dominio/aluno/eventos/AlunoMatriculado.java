@@ -17,7 +17,7 @@ public class AlunoMatriculado implements Evento {
 
     @Override
     public LocalDateTime momento() {
-        return null;
+        return momento;
     }
 
     public CPF getCpfDoAluno() {
