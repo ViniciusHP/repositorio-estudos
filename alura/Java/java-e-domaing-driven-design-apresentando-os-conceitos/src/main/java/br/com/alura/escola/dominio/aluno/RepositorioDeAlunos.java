@@ -9,7 +9,4 @@ public interface RepositorioDeAlunos {
 	Aluno buscarPorCPF(CPF cpf);
 	
 	List<Aluno> listarTodosAlunosMatriculados();
-	
-	//...
-
 }
