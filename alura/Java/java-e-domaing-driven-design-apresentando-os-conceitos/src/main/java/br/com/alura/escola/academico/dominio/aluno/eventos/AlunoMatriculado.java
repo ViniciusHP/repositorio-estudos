@@ -1,7 +1,7 @@
 package br.com.alura.escola.academico.academico.dominio.aluno.eventos;
 
 import br.com.alura.escola.academico.academico.dominio.Evento;
-import br.com.alura.escola.academico.academico.dominio.aluno.CPF;
+import br.com.alura.escola.shared.dominio.CPF;
 
 import java.time.LocalDateTime;
 

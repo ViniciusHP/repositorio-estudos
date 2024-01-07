@@ -6,7 +6,7 @@ import br.com.alura.escola.academico.academico.dominio.PublicadorDeEventos;
 import org.junit.jupiter.api.Test;
 
 import br.com.alura.escola.academico.academico.dominio.aluno.Aluno;
-import br.com.alura.escola.academico.academico.dominio.aluno.CPF;
+import br.com.alura.escola.shared.dominio.CPF;
 import br.com.alura.escola.academico.academico.infra.aluno.RepositorioDeAlunosEmMemoria;
 
 class MatricularAlunoTest {

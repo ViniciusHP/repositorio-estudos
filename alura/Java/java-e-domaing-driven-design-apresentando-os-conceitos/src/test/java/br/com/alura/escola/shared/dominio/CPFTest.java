@@ -1,4 +1,4 @@
-package br.com.alura.escola.academico.academico.dominio.aluno;
+package br.com.alura.escola.shared.dominio;
 
 import static org.junit.jupiter.api.Assertions.*;
 

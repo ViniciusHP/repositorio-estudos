@@ -1,6 +1,6 @@
 package br.com.alura.escola.academico.academico.aplicacao.aluno.matricular;
 
-import br.com.alura.escola.academico.academico.dominio.aluno.CPF;
+import br.com.alura.escola.shared.dominio.CPF;
 import br.com.alura.escola.academico.academico.dominio.aluno.Aluno;
 import br.com.alura.escola.academico.academico.dominio.aluno.Email;
 

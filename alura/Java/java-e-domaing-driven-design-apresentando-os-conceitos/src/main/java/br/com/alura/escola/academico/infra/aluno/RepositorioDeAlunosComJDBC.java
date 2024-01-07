@@ -10,7 +10,7 @@ import java.util.List;
 import br.com.alura.escola.academico.academico.dominio.aluno.RepositorioDeAlunos;
 import br.com.alura.escola.academico.academico.dominio.aluno.Aluno;
 import br.com.alura.escola.academico.academico.dominio.aluno.validacoes.AlunoNaoEncontrado;
-import br.com.alura.escola.academico.academico.dominio.aluno.CPF;
+import br.com.alura.escola.shared.dominio.CPF;
 import br.com.alura.escola.academico.academico.dominio.aluno.Email;
 import br.com.alura.escola.academico.academico.dominio.aluno.Telefone;
 

@@ -1,6 +1,6 @@
 package br.com.alura.escola.academico.academico.dominio.aluno.validacoes;
 
-import br.com.alura.escola.academico.academico.dominio.aluno.CPF;
+import br.com.alura.escola.shared.dominio.CPF;
 
 public class AlunoNaoEncontrado extends RuntimeException {
 
