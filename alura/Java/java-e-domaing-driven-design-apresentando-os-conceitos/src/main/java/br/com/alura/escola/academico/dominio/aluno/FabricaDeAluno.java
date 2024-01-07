@@ -1,4 +1,6 @@
-package br.com.alura.escola.academico.academico.dominio.aluno;
+package br.com.alura.escola.academico.dominio.aluno;
+
+import br.com.alura.escola.shared.dominio.CPF;
 
 public class FabricaDeAluno {
 	

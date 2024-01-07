@@ -1,6 +1,8 @@
-package br.com.alura.escola.academico.academico.dominio.aluno;
+package br.com.alura.escola.academico.dominio.aluno;
 
-import br.com.alura.escola.academico.academico.dominio.aluno.validacoes.LimiteDeTelefonesAtingido;
+
+import br.com.alura.escola.academico.dominio.aluno.validacoes.LimiteDeTelefonesAtingido;
+import br.com.alura.escola.shared.dominio.CPF;
 
 import java.util.ArrayList;
 import java.util.List;

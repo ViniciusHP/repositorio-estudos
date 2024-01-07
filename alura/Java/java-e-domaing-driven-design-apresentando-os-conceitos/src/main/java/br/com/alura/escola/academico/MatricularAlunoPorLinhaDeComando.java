@@ -1,10 +1,10 @@
-package br.com.alura.escola.academico.academico;
+package br.com.alura.escola.academico;
 
-import br.com.alura.escola.academico.academico.aplicacao.aluno.matricular.MatricularAluno;
-import br.com.alura.escola.academico.academico.aplicacao.aluno.matricular.MatricularAlunoDto;
-import br.com.alura.escola.academico.academico.dominio.PublicadorDeEventos;
-import br.com.alura.escola.academico.academico.dominio.aluno.ouvintes.LogDeAlunoMatriculado;
-import br.com.alura.escola.academico.academico.infra.aluno.RepositorioDeAlunosEmMemoria;
+import br.com.alura.escola.academico.aplicacao.aluno.matricular.MatricularAluno;
+import br.com.alura.escola.academico.aplicacao.aluno.matricular.MatricularAlunoDto;
+import br.com.alura.escola.shared.dominio.evento.PublicadorDeEventos;
+import br.com.alura.escola.academico.dominio.aluno.ouvintes.LogDeAlunoMatriculado;
+import br.com.alura.escola.academico.infra.aluno.RepositorioDeAlunosEmMemoria;
 
 public class MatricularAlunoPorLinhaDeComando {
 	

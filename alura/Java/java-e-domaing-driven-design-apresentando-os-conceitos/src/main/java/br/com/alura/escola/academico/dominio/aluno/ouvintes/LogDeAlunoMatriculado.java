@@ -1,8 +1,8 @@
-package br.com.alura.escola.academico.academico.dominio.aluno.ouvintes;
+package br.com.alura.escola.academico.dominio.aluno.ouvintes;
 
-import br.com.alura.escola.academico.academico.dominio.Evento;
-import br.com.alura.escola.academico.academico.dominio.Ouvinte;
-import br.com.alura.escola.academico.academico.dominio.aluno.eventos.AlunoMatriculado;
+import br.com.alura.escola.shared.dominio.evento.Evento;
+import br.com.alura.escola.shared.dominio.evento.Ouvinte;
+import br.com.alura.escola.academico.dominio.aluno.evento.AlunoMatriculado;
 
 import java.time.format.DateTimeFormatter;
 

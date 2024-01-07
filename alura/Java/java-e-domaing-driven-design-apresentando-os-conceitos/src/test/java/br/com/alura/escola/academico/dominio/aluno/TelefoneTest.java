@@ -1,4 +1,4 @@
-package br.com.alura.escola.academico.academico.dominio.aluno;
+package br.com.alura.escola.academico.dominio.aluno;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

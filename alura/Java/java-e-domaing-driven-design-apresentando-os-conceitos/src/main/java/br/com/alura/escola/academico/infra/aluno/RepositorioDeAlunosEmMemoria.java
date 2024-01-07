@@ -1,12 +1,12 @@
-package br.com.alura.escola.academico.academico.infra.aluno;
+package br.com.alura.escola.academico.infra.aluno;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.alura.escola.shared.dominio.CPF;
-import br.com.alura.escola.academico.academico.dominio.aluno.RepositorioDeAlunos;
-import br.com.alura.escola.academico.academico.dominio.aluno.validacoes.AlunoNaoEncontrado;
-import br.com.alura.escola.academico.academico.dominio.aluno.Aluno;
+import br.com.alura.escola.academico.dominio.aluno.RepositorioDeAlunos;
+import br.com.alura.escola.academico.dominio.aluno.validacoes.AlunoNaoEncontrado;
+import br.com.alura.escola.academico.dominio.aluno.Aluno;
 
 public class RepositorioDeAlunosEmMemoria implements RepositorioDeAlunos {
 
