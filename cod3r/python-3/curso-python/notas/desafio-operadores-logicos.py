@@ -72,3 +72,9 @@ lista_c = [1, 2, 3]
 print(lista_a is lista_b)
 print(lista_b is lista_c)
 print(lista_a is not lista_c)
+
+lista_c[1] = 200
+lista_a[1] = 300
+print(lista_a)
+print(lista_b)
+print(lista_c)
