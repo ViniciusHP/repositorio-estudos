@@ -67,3 +67,23 @@ vai sobrar no final do mês!
 print(salario - despesas)
 
 print('Fim')
+
+'''
+Comentário de multiplas linhas
+'''
+
+# Operadores Aritméticos
+
+print(2 + 3)
+print(4 - 7)
+print(2 * 5.3)
+print(9.4 / 3)
+
+# Divisão com resultado inteiro
+print(9.4 // 3)
+
+# Exponenciação
+print(2 ** 8)
+
+# Módulo
+print(10 % 3)
