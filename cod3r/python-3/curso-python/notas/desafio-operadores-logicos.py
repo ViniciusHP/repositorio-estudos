@@ -20,3 +20,24 @@ print('Tv50={} Tv32={} Sorvete={} Saudável={}'
 
 # Interpolação com índice
 # "{1}, {2} = {0}".format(1, False, 'resultado')
+
+# Operadores unários
+a = 3
+
+# a++ (não existe esta sintaxe no python)
+a += 1
+
+# a-- (não existe esta sintaxe no python)
+a -= 1
+
+# Tornar valor negativo
+-a
+
+# Não muda o sinal do valor
++a
+
+not 0
+not 1
+not -2
+not False
+not not True
