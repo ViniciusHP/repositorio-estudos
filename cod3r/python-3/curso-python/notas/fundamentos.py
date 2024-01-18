@@ -53,3 +53,17 @@ print(a + b)
 
 a = 'Agora sou uma string!'
 print(a)
+
+# Comentários
+
+# Minhas variáveis
+salario = 3460.45
+despesas = 2456.2
+
+"""
+A ideia é calcular o quanto
+vai sobrar no final do mês!
+"""
+print(salario - despesas)
+
+print('Fim')
