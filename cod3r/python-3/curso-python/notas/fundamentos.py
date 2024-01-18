@@ -42,3 +42,14 @@ print({'nome': 'Pedro', 'idade': 22})
 
 # Equivalente ao null ou undefined (ausência de valor)
 print(None)
+
+# Variáveis
+
+# Atribuição
+a = 10
+b = 5.2
+
+print(a + b)
+
+a = 'Agora sou uma string!'
+print(a)
