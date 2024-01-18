@@ -125,3 +125,64 @@ print(a)
 
 a //= 127
 print(a)
+
+# Operadores Lógicos
+
+True or False
+7 != 3 and 2 > 3
+
+# Tabela verdade do AND
+True and True
+True and False
+False and True
+False and False
+
+# Tabela verdade do OR
+True or True
+True or False
+False or True
+False or False
+
+# Tabela verdade do XOR
+True != True
+True != False
+False != True
+False != False
+
+# Operador de Negação (unário)
+not True
+not False
+
+# Operadores bit-a-bit
+True & False
+False | True
+True ^ False
+
+# AND Bit-a-bit
+# 3 = 11
+# 2 = 10
+# _ = 1 0
+3 & 2
+
+# OR Bit-a-bit
+# 3 = 11
+# 2 = 10
+# _ = 11
+3 | 2
+
+# XOR Bit-a-bit
+# 3 = 11
+# 2 = 10
+# _ = 01
+3 ^ 2
+
+# Um pouco de realidade
+saldo = 1000
+salario = 4000
+despesas = 2967
+
+saldo_positivo = saldo > 0
+despesas_controladas = salario - despesas >= 0.2 * salario
+
+meta = saldo_positivo and despesas_controladas
+print(meta)
