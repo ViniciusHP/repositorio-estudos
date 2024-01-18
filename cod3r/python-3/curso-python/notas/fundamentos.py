@@ -97,3 +97,31 @@ print(10 % 3)
 3 != 2
 3 == 3
 2 == '2'
+
+# Operadores de Atribuição
+
+a = 3
+a = a + 7
+print(a)
+
+# Forma reduzida de a = a + 5
+a += 5
+print(a)
+
+a -= 3
+print(a)
+
+a *= 2
+print(a)
+
+a /= 4
+print(a)
+
+a %= 4
+print(a)
+
+a **= 8
+print(a)
+
+a //= 127
+print(a)
