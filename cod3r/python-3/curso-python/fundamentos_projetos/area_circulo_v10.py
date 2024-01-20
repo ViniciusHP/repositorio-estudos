@@ -1,5 +1,6 @@
 #!python
 from math import pi
+import sys
 
 
 def area(raio):
@@ -7,6 +8,6 @@ def area(raio):
 
 
 if __name__ == '__main__':
-    raio = input('Informe o raio: ')
+    raio = sys.argv[1]
     area_cirulo = area(raio)
     print('Área do círculo', area_cirulo)
