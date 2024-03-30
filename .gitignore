@@ -84,3 +84,6 @@ HELP.md
 # System Files
 **/.DS_Store
 **/Thumbs.db
+
+# Python
+**/__pycache__/
