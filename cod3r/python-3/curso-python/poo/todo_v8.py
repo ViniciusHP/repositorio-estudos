@@ -2,6 +2,10 @@
 from datetime import datetime, timedelta
 
 
+class TarefaNaoEncontrada(Exception):
+    pass
+
+
 class Projeto:
     def __init__(self, nome):
         self.nome = nome
@@ -17,9 +21,12 @@ class Projeto:
         return [tarefa for tarefa in self.tarefas if not tarefa.feito]
 
     def procurar(self, descricao):
-        # Possível IndexError
-        return [tarefa for tarefa in self.tarefas
-                if tarefa.descricao == descricao][0]
+        try:
+            # Possível IndexError
+            return [tarefa for tarefa in self.tarefas
+                    if tarefa.descricao == descricao][0]
+        except IndexError as e:
+            raise TarefaNaoEncontrada(str(e))
 
     def _add_tarefa(self, tarefa, **kwargs):
         self.tarefas.append(tarefa)
@@ -93,6 +100,13 @@ def main():
     for tarefa in casa:
         print(f'- {tarefa}')
     print(casa)
+
+    try:
+        casa.procurar('Lavar prato - ERRO').concluir()
+    except TarefaNaoEncontrada as e:
+        print(f'ERRO: A causa foi "{str(e)}"!')
+    finally:
+        print('Bloco finally sempre será executado!')
 
     mercado = Projeto('Compras no mercado')
     mercado.add('Frutas secas')
