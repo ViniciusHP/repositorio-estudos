@@ -1,0 +1,4 @@
+pip freeze > requirements.txt
+pip install -r requirements.txt
+pip list --outdated
+pip install --upgrade pip
