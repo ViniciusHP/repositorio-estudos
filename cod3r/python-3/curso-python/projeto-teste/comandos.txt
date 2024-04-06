@@ -1,0 +1,20 @@
+# Cria o ambiente
+python -m venv .venv
+
+# Ativa o venv no Windows
+source .venv/Scripts/activate
+
+# Verificar a variável que aponta para o ambiente virtual
+echo $VIRTUAL_ENV
+
+# Verificar onde está buscando os pacotes
+python -c 'import sys;print("\n".join(sys.path))'
+
+# Verificar o que está instalado
+pip list
+
+# Gerar aquivo com as dependências
+pip freeze > requirements.txt
+
+# Instalar dependências
+pip install -r requirements.txt
