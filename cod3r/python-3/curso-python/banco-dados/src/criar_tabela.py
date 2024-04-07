@@ -8,7 +8,7 @@ tabela_contatos = """
     );
 """
 
-tablea_emails = """
+tabela_emails = """
     CREATE TABLE emails(
         id INT AUTO_INCREMENT PRIMARY KEY,
         dono VARCHAR(50)
@@ -19,7 +19,7 @@ try:
         try:
             cursor = conexao.cursor()
             cursor.execute(tabela_contatos)
-            cursor.execute(tablea_emails)
+            cursor.execute(tabela_emails)
         except ProgrammingError as e:
             print(f'Erro: {e.msg}')
 except ProgrammingError as e:
