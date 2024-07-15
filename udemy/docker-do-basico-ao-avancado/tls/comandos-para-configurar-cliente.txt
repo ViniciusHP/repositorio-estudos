@@ -1,0 +1,10 @@
+$ openssl req -subj '/CN=client' -nodes -new -newkey rsa:4096 -keyout client.key -out client.csr
+$ echo extendedKeyUsage = clientAuth > extfile-client.cnf
+$ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -extfile extfile-client.cnf
+Copiar os certificados para a máquina local:
+
+$ scp -r vagrant@172.89.0.11:/home/vagrant/ssl/ssl/ .
+$ docker --tlsverify --tlscacert=ca.crt --tlscert=client.crt --tlskey=client.key -H=172.89.0.11:2376 version
+Para configurar TLS por default:
+
+$ docker context create swarm-tls --description "Docker Swarm with TLS" --docker "host=tcp://172.89.0.11:2376,ca=/home/mateus/.docker/ssl/ca.crt,cert=/home/mateus/.docker/ssl/client.crt,key=/home/mateus/.docker/ssl/client.key"

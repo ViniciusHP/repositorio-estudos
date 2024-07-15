@@ -1,0 +1,28 @@
+$ mkdir -p /etc/docker/ssl
+$ cd /etc/docker/ssl
+$ openssl req -nodes -new -x509 -days 365 -newkey rsa:4096 -keyout ca.key -sha256 -out ca.crt
+$ openssl req -subj "/CN=node-1" -nodes -sha256 -new -newkey rsa:4096 -keyout docker.key -out docker.csr
+$ echo subjectAltName = DNS:node-1,IP:172.89.0.11 >> extfile.cnf
+$ echo extendedKeyUsage = serverAuth >> extfile.cnf
+$ openssl x509 -req -days 365 -sha256 -in docker.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out docker.crt -extfile extfile.cnf
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target firewalld.service containerd.service
+Wants=network-online.target
+Requires=docker.socket containerd.service
+ 
+[Service]
+Type=notify
+# the default is not to use systemd for cgroups because the delegate issues still
+# exists and systemd currently does not support the cgroup feature set required
+# for containers run by docker
+ExecStart=/usr/bin/dockerd --tlsverify \\
+  --tlscacert=/etc/docker/ssl/ca.crt \\
+  --tlscert=/etc/docker/ssl/docker.crt \\
+  --tlskey=/etc/docker/ssl/docker.key \\
+  -H=0.0.0.0:2376
+...
+...
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
