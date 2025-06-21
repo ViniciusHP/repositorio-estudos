@@ -1,13 +1,13 @@
 import { Sequelize } from "sequelize";
-import { CONFIG } from "../constants/Constants.js";
+import { API_CONFIG } from "../constants/Constants.js";
 
 const sequelize = new Sequelize(
-  CONFIG.DB_NAME,
-  CONFIG.DB_USERNAME,
-  CONFIG.DB_PASSWORD,
+  API_CONFIG.DB_NAME,
+  API_CONFIG.DB_USERNAME,
+  API_CONFIG.DB_PASSWORD,
   {
-    host: CONFIG.DB_HOST,
-    port: CONFIG.DB_PORT,
+    host: API_CONFIG.DB_HOST,
+    port: API_CONFIG.DB_PORT,
     dialect: "postgres",
     quoteIdentifiers: false,
     define: {
